@@ -1,0 +1,42 @@
+<!-- index.ejs copy and pasted from index.html in root-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Flower Stop Inventory - EA</title>
+  </head>
+
+  <body>
+    <h1>The Flower Stop Inventory</h1>
+
+    <h2>Insert Plant Inventory</h2>
+    <form action="/plants" method="POST">
+      <input type="text" placeholder="Type" name="Type" />
+      <input type="text" placeholder="Name" name="Name" />
+      <input type="number" placeholder="quantity" name="quantity">
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2> Inventory Items </h2>
+    <table style="width: 50%"class="plants">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Quantity</th>
+      </tr>
+      <!-- Loop through quotes -->
+      <% for(var i = 0; i < plants.length; i++) {%>
+        <tr class="plant">
+          <!-- Output name from the iterated quote object -->
+          <td><%= plants[i].Type %></td>:
+          <!-- Output quote from the iterated quote object -->
+          <td><%= plants[i].Name %></td>
+          <td><%= plants[i].quantity %></td>
+        </tr>
+      <% } %>
+    </table>
+
+
+<script src="/main.js"></script>
+  </body>
+</html>
