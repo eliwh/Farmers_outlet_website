@@ -7,7 +7,7 @@ const app = express();
 // C = Create | POST
 // R = Read | GET
 // U = Update | PUT
-// D = Delete |
+// D = Delete | Self explanatory fam
 
 
     // ========================
@@ -17,6 +17,12 @@ const app = express();
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
     app.use(express.static('public'))
+
+// Here we are connectng to MongoDB. All of our CRUD operations are going to be done within the mongodb function
+
+// NOTE: This is where @Elijah was tinkering around with the inventory back end. Elijah will be looking in how we can
+// use these concepts for other scripts. I.e having multiple JavaScript files for specific operations on the db like
+// reflecting inventory that was posted, user login, blog posts and exedra so that the files are organized.
 
 app.use(bodyParser.urlencoded({extended : true}));
 MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net/tfsInventory?retryWrites=true&w=majority',
