@@ -30,7 +30,7 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   if(err) return console.error(err);
   console.log("Connected to MongoDB");
   const db = client.db("tfsInventory");
-  const quoteCollection = db.collection("Plants");
+  const plantsCollection = db.collection("Plants");
 
   app.listen(3000, function(){
     console.log('Listening on 3000');
@@ -48,10 +48,24 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   })
 
   app.post("/plants", (req, res) => {
-    quoteCollection.insertOne(req.body).then(
+    plantsCollection.insertOne(req.body).then(
       result => {
         res.redirect('/')
       }).catch(error => console.error(error))
   });
 
+  app.put('/plants', (req, res) => {
+    quoteCollection.findOneAndUpdate(
+      { type: '#Type' },
+      {
+        $set: {
+          quantity: req.body.quantity,
+          type: req.body.type,
+          name: req.body.name
+        }
+      }
+    )
+    .then(result => {res.json('Success')})
+    .catch(error => console.error(error))
+  });
 });
