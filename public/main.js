@@ -3,15 +3,28 @@
 const update = document.querySelector('#update-button')
 const deleteButton = document.querySelector('#delete-button')
 const messageDiv = document.querySelector('#message')
+const signUp = document.querySelector('#signup-button')
+
+let type = document.getElementById('Type');
+let html = type.outerHTML;
+let typeData = {html: html};
+
+let name = document.getElementById('Name');
+let html = name.outerHTML;
+let nameData = {html: html};
+
+let quantity = document.getElementById('#quantity');
+let html = quantity.outerHTML;
+let quanData = {html: html};
+
+let data = {name: "#name", type: "Type", quantity: "quantity"}
+let info = JSON.stringify(data)
 
 update.addEventListener('click', _ => {
-  fetch('/quotes', {
+  fetch('/Plants', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: 'Darth Vadar',
-      quote: 'I find your lack of faith disturbing.'
-    })
+    body: info
   })
     .then(res => {
       if (res.ok) return res.json()

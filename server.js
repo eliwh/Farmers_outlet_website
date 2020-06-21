@@ -1,6 +1,7 @@
 const express = require ('express');
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
+const bcrypt = require ('bcrypt');
 const fs = require ('fs');
 const multer = require('multer');
 const MongoClient = require('mongodb').MongoClient;
@@ -32,13 +33,16 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
  {useUnifiedTopology: true},(err, client) => {
   if(err) return console.error(err);
   console.log("Connected to MongoDB");
-  const db = client.db("tfsInventory");
+  var db = client.db("tfsInventory");
+  var usersDB = client.db("userAccounts");
   const plantsCollection = db.collection("Plants");
+  const accountsCollection = usersDB.collection("Users");
 
   app.listen(3000, function(){
     console.log('Listening on 3000');
   });
 
+//Home page (Currently admin inventory)
   app.get('/', (req, res) => {
     // res.sendFile(__dirname + '/index.html');
     db.collection('Plants').find().toArray()
@@ -50,6 +54,31 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
       .catch(error => console.error(error))
   })
 
+// User account routes
+  app.get('/users.ejs', (req,res) => {
+    // res.sendFile(__dirname + '/index.html');
+    usersDB.collection('Users').find().toArray()
+      .then(results => {
+        // Similar to sendFile above accept we do not need to specify the
+        // directory. It works just find I suppose
+        res.render('users.ejs')
+      })
+      .catch(error => console.error(error))
+
+  })
+
+  app.post("/Users", async (req,res)=>{
+
+      const salt = await bcrypt.genSalt()
+      const hashedPassword = await bcrypt.hash(req.body.password, salt)
+
+    accountsCollection.insertOne(req.body).then(
+      result =>{
+        res.redirect('/')
+      }).catch(error => console.log(error))
+  });
+
+//Inventory Routes
   app.post("/plants", (req, res) => {
     plantsCollection.insertOne(req.body).then(
       result => {
@@ -57,9 +86,9 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
       }).catch(error => console.error(error))
   });
 
-  app.put('/plants', (req, res) => {
+  app.put('/Plants', (req, res) => {
     quoteCollection.findOneAndUpdate(
-      { type: '#Type' },
+      { type: req.body.type },
       {
         $set: {
           quantity: req.body.quantity,

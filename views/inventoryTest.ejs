@@ -8,21 +8,21 @@
 
   <body>
     <h1>The Flower Stop Inventory</h1>
-
+    <a href="users.ejs"> Click here to create an account</a>
     <h2>Insert Plant Inventory</h2>
     <form action="/plants" method="POST">
-      <input type="text" placeholder="Type" name="Type" />
-      <input type="text" placeholder="Name" name="Name" />
-      <input type="number" placeholder="quantity" name="quantity">
+      <input type="text" placeholder="Type" name="Type"  />
+      <input type="text" placeholder="Name" name="Name"  />
+      <input type="number" placeholder="quantity" name="quantity" />
       <button type="submit">Submit</button>
     </form>
 
     <h2>Update an item</h2>
-    <form>
-      <input type="text" placeholder="Type" name="Type" />
-      <input type="text" placeholder="Name" name="Name" />
-      <input type="number" placeholder="quantity" name="quantity">
-      <button id="update-button "type="submit">Submit</button>
+    <form id="inventory-form">
+      <input type="text" placeholder="Type" name="Type" id="Type" />
+      <input type="text" placeholder="Name" name="Name" id="Name" />
+      <input type="number" placeholder="quantity" name="quantity" id="quantity" />
+      <button id="update-button" type="submit">Submit</button>
     </form>
 
     <h2> Inventory Items </h2>
