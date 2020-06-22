@@ -24,7 +24,11 @@ update.addEventListener('click', _ => {
   fetch('/Plants', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    body: info
+    body:JSON.stringify({
+      name: "Pepper",
+      type: "Veggetable",
+      quantity: "2"
+    })
   })
     .then(res => {
       if (res.ok) return res.json()
