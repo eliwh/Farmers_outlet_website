@@ -88,7 +88,7 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
 
   app.put('/Plants', (req, res) => {
     quoteCollection.findOneAndUpdate(
-      { type: req.body.type },
+      { type: "Vegetable"},
       {
         $set: {
           quantity: req.body.quantity,

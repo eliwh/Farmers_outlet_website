@@ -5,26 +5,14 @@ const deleteButton = document.querySelector('#delete-button')
 const messageDiv = document.querySelector('#message')
 const signUp = document.querySelector('#signup-button')
 
-let type = document.getElementById('Type');
-let html = type.outerHTML;
-let typeData = {html: html};
+let invForm = $('inventory-form').serializejson();
 
-let name = document.getElementById('Name');
-let html = name.outerHTML;
-let nameData = {html: html};
-
-let quantity = document.getElementById('#quantity');
-let html = quantity.outerHTML;
-let quanData = {html: html};
-
-let data = {name: "#name", type: "Type", quantity: "quantity"}
-let info = JSON.stringify(data)
 
 update.addEventListener('click', _ => {
   fetch('/Plants', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    body: info
+    body: JSON.stringify(invForm);
   })
     .then(res => {
       if (res.ok) return res.json()
