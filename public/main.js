@@ -5,26 +5,30 @@ const deleteButton = document.querySelector('#delete-button')
 const messageDiv = document.querySelector('#message')
 const signUp = document.querySelector('#signup-button')
 
-let type = document.getElementById('Type');
-let html = type.outerHTML;
-let typeData = {html: html};
+// let invForm = $('#inventory-form').serializeJSON();
+// console.log(JSON.stringify(invForm));
 
-let name = document.getElementById('Name');
-let html = name.outerHTML;
-let nameData = {html: html};
-
-let quantity = document.getElementById('#quantity');
-let html = quantity.outerHTML;
-let quanData = {html: html};
-
-let data = {name: "#name", type: "Type", quantity: "quantity"}
-let info = JSON.stringify(data)
 
 update.addEventListener('click', _ => {
+  let name = document.getElementById("name").value;
+  console.log(name);
+  let type = document.getElementById("type").value;
+  console.log(type);
+  let quantity = document.getElementById("quantity").value;
+  console.log(quantity);
+
+//   let nameS = name.toString();
+//   let typeS = type.toString();
+//   let quanS = quantity.toString();
+// alert(nameS);
   fetch('/Plants', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    body: info
+    body: JSON.stringify({
+      type: type,
+      name: name,
+      quantity: quantity
+    })
   })
     .then(res => {
       if (res.ok) return res.json()
@@ -35,7 +39,7 @@ update.addEventListener('click', _ => {
 })
 
 deleteButton.addEventListener('click', _ => {
-  fetch('/quotes', {
+  fetch('/Plants', {
     method: 'delete',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

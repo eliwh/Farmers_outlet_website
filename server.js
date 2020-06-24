@@ -58,7 +58,7 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   app.get('/users.ejs', (req,res) => {
     // res.sendFile(__dirname + '/index.html');
     usersDB.collection('Users').find().toArray()
-      .then(results => {
+      .then(results  => {
         // Similar to sendFile above accept we do not need to specify the
         // directory. It works just find I suppose
         res.render('users.ejs')
@@ -87,13 +87,20 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   });
 
   app.put('/Plants', (req, res) => {
-    quoteCollection.findOneAndUpdate(
-      { type: req.body.type },
+  plantsCollection.findOneAndUpdate(
+
+    // Important to specify that the filter is not empty
+      {Type: req.body.type}, //<---- filter
       {
+        // Important to note that the fields you will be updating must match
+        // exactly. This means that they are case sensitive as well.
+
+        // $Set is our query. Here we are updating the fields via user input.
+        // The code is from main.js
         $set: {
-          quantity: req.body.quantity,
-          type: req.body.type,
-          name: req.body.name
+          Type: req.body.type,
+          Name: req.body.name,
+          quantity: req.body.quantity
         }
       }
     )
