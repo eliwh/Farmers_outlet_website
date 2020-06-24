@@ -100,11 +100,23 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
         $set: {
           Type: req.body.type,
           Name: req.body.name,
-          quantity: req.body.quantity
+          Quantity: req.body.quantity
         }
       }
     )
     .then(result => {res.json('Success')})
     .catch(error => console.error(error))
-  });
+  })
+    app.delete('/Plants', (req,res) => {
+    plantsCollection.deleteOne(
+      {Name: req.body.name},
+    )
+    .then(result => {
+      if (result.deletedCount === 0) {
+        return res.json('Item Not Found')
+      }
+      res.json(`Deleted Inventory Item`)
+     })
+     .catch(error => console.error(error))
+  })
 });

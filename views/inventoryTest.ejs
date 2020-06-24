@@ -13,7 +13,7 @@
     <form action="/plants" method="POST">
       <input type="text" placeholder="Type" name="Type"  />
       <input type="text" placeholder="Name" name="Name"  />
-      <input type="text" placeholder="quantity" name="quantity" />
+      <input type="number" placeholder="Quantity" name="Quantity" />
       <button type="submit">Submit</button>
     </form>
 
@@ -21,15 +21,13 @@
     <form id="inventory-form" onsubmit="return false;">
       <input id="type" type="text" placeholder="Type" name="Type"  />
       <input id="name" type="text" placeholder="Name" name="Name"  />
-      <input id="quantity" type="text" placeholder="quantity" name="quantity"  />
+      <input id="quantity" type="number" placeholder="Quantity" name="Quantity"  />
       <button id="update-button" type="submit">Submit</button>
     </form>
 
-    <h2>Delete Form</h2>
-    <form method="post" >
-      <input type="text" placeholder="Type" name="Type"  />
-      <input type="text" placeholder="Name" name="Name" />
-      <input type="text" placeholder="Quantity" name="quantity" />
+    <h2>Delete An Item</h2>
+    <form>
+      <input id="delete-name" type="text" placeholder="Item Name" name="Name" />
       <button id="delete-button" type="submit">Submit</button>
     </form>
 
@@ -49,7 +47,7 @@
           <td><%= plants[i].Type %></td>:
           <!-- Output plant from the iterated plant object -->
           <td><%= plants[i].Name %></td>
-          <td><%= plants[i].quantity %></td>
+          <td><%= plants[i].Quantity %></td>
         </tr>
       <% } %>
     </table>
