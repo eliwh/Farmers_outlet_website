@@ -55,20 +55,22 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   })
 
 // User account routes
-  app.get('/users.ejs', (req,res) => {
-    // res.sendFile(__dirname + '/index.html');
+
+// Signup Route
+// NOTE: all set
+  app.get('/usrSignup.ejs', (req,res) => {
     usersDB.collection('Users').find().toArray()
       .then(results  => {
         // Similar to sendFile above accept we do not need to specify the
         // directory. It works just find I suppose
-        res.render('users.ejs')
+        res.render('usrSignup.ejs')
       })
       .catch(error => console.error(error))
 
   })
 
   app.post("/Users", async (req,res)=>{
-
+      // NOTE: looking into how to encrypt passwords for user accounts here
       const salt = await bcrypt.genSalt()
       const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
@@ -78,7 +80,70 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
       }).catch(error => console.log(error))
   });
 
+  // TODO: Create login route
+  // Login Route
+  app.get('/usrLogin.ejs', (req,res) => {
+    usersDB.collection('Users').find().toArray()
+      .then(results  => {
+        // Similar to sendFile above accept we do not need to specify the
+        // directory. It works just find I suppose
+        res.render('usrLogin.ejs')
+      })
+      .catch(error => console.error(error))
+
+  })
+
+  // TODO: Create admin login route
+  //  AdminLogin Route
+  app.get('/adminLogin.ejs', (req,res) => {
+    usersDB.collection('Users').find().toArray()
+      .then(results  => {
+        // Similar to sendFile above accept we do not need to specify the
+        // directory. It works just find I suppose
+        res.render('adminLogin.ejs')
+      })
+      .catch(error => console.error(error))
+
+  })
+  // User Order Request Routes
+  // TODO:
+  app.get('/usrOrders.ejs', (req,res) => {
+    usersDB.collection('Users').find().toArray()
+      .then(results  => {
+        //Renders the .ejs or .html file we want displayed
+        res.render('usrOrders.ejs')
+      })
+      .catch(error => console.error(error))
+
+  })
+
+  app.post("/usrOrders", async (req,res)=>{
+    accountsCollection.insertOne(req.body).then(
+      result =>{
+        res.redirect('/')
+      }).catch(error => console.log(error))
+  });
+
+  // Admin Order Routes
+  // TODO:
+  app.get('/orders.ejs', (req,res) => {
+    usersDB.collection('Users').find().toArray()
+      .then(results  => {
+        //Renders the .ejs or .html file we want displayed
+        res.render('orders.ejs')
+      })
+      .catch(error => console.error(error))
+
+  })
+
+  app.post("/Orders", async (req,res)=>{
+    accountsCollection.insertOne(req.body).then(
+      result =>{
+        res.redirect('/')
+      }).catch(error => console.log(error))
+  });
 //Inventory Routes
+// NOTE: done
   app.post("/plants", (req, res) => {
     plantsCollection.insertOne(req.body).then(
       result => {
