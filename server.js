@@ -42,13 +42,20 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
     console.log('Listening on 3000');
   });
 
+
 //Home page (Currently admin inventory)
-  app.get('/', (req, res) => {
-    // res.sendFile(__dirname + '/index.html');
+app.get('/', (req, res) => {
+  db.collection('Plants').find().toArray()
+    .then(results => {
+      res.render('home.ejs')
+    })
+    .catch(error => console.error(error))
+})
+
+//Admin page view
+  app.get('/Admin Page', (req, res) => {
     db.collection('Plants').find().toArray()
       .then(results => {
-        // Similar to sendFile above accept we do not need to specify the
-        // directory. It works just find I suppose
         res.render('inventoryTest.ejs', {plants: results})
       })
       .catch(error => console.error(error))
