@@ -57,9 +57,8 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
 // User account routes
 
 // Signup Route
-// NOTE: all set
-// var User = require('./models/usersAuth.js');
-
+// NOTE: Can create users and insert them into mongodb. The passwords
+// are also encrypted. To finalize this we need to authenticate them.
   app.get('/Signup', (req,res) => {
     usersDB.collection('Users').find().toArray()
       .then(results  => {
@@ -70,36 +69,23 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   })
 
   app.post("/Users", async (req,res)=>{
-    accountsCollection.insertOne(req.body).then(
-      result =>{
-        res.redirect('/')
-      }).catch(error => console.log(error))
-  });
-
-
-  app.post('/Signup', function(req, res) {
-    var new_user = new User({
-      username: req.username
-    });
-
-    new_user.password = new_user.generateHash(userInfo.password);
-    new_user.save();
-  });
-
-  app.post('/login', function(req, res) {
-    User.findOne({username: req.body.username}, function(err, user) {
-
-      if (!user.validPassword(req.body.password)) {
-        //password did not match
-      } else {
-        // password matched. proceed forward
-      }
-    });
+    const hashedPwd = await bcrypt.hash(req.body.password, 10)
+    accountsCollection.insertOne(
+      {
+        email: req.body.email,
+        first_name: req.body.firstName,
+        last_name: req.body.lastName,
+        username: req.body.username,
+        password: hashedPwd
+      }).then(
+        result =>{
+          res.redirect('/Login')
+        }).catch(error => console.log(error))
   });
 
   // TODO: Create login route
   // Login Route
-  app.get('/usrLogin.ejs', (req,res) => {
+  app.get('/Login', (req,res) => {
     usersDB.collection('Users').find().toArray()
       .then(results  => {
         // Similar to sendFile above accept we do not need to specify the
