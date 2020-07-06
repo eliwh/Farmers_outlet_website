@@ -10,8 +10,8 @@
   <h1>Account Central</h1>
   <h2>Sign Up</h2>
   <form action="Users" method="POST">
-    <label>Email Address</label>
-    <input type="text" name="email" value="">
+    <label for="email">Email Address</label>
+    <input type="text" name="email" id="email" required>
     <br>
     <label>First Name:</label>
     <input type="text" name="firstName" value="">
@@ -22,8 +22,8 @@
     <label>Username:</label>
     <input type="text" name="username" value="">
     <br>
-    <label>Password:</label>
-    <input type="password" name="password" value="">
+    <label for="">Password</label>
+    <input type="password" name="password" id="passport" required>
     <br>
     <button type="submit" id="signup-button">Sign Up</button>
   </form>

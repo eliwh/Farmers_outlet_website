@@ -1,9 +1,18 @@
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config()
+}
 const express = require ('express');
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const bcrypt = require ('bcrypt');
 const fs = require ('fs');
 const multer = require('multer');
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const initializePassport = require('./passport-config.js')
+
+
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
@@ -18,11 +27,20 @@ const app = express();
     // Middlewares
     // ========================
     app.set('view engine', 'ejs')
-    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.urlencoded({ extended: false }))
     app.use(bodyParser.json())
     app.use(express.static('public'))
+    app.use(flash())
+    app.use(session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized:false
+    }))
+    app.use(passport.initialize())
+    app.use(passport.session())
 
-// Here we are connectng to MongoDB. All of our CRUD operations are going to be done within the mongodb function
+// Here we are connectng to MongoDB. All of our CRUD operations
+// are going to be done within the mongodb function
 app.use(bodyParser.urlencoded({extended : true}));
 MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net/tfsInventory?retryWrites=true&w=majority',
  {useUnifiedTopology: true},(err, client) => {
@@ -33,17 +51,44 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
   const plantsCollection = db.collection("Plants");
   const accountsCollection = usersDB.collection("Users");
 
+  initializePassport(
+    passport,
+    email => accountsCollection.findOne({email: req.body.email}),
+    id => accountsCollection.findOne({_id: req.body.id})
+  )
+
   app.listen(3000, function(){
     console.log('Listening on 3000');
   });
 
+
 //Home page (Currently admin inventory)
-  app.get('/', (req, res) => {
-    // res.sendFile(__dirname + '/index.html');
+app.get('/', (req, res) => {
+  db.collection('Plants').find().toArray()
+    .then(results => {
+      res.render('home.ejs')
+    })
+    .catch(error => console.error(error))
+})
+
+app.get('/Produce', (req, res) => {
+  db.collection('Plants').find().toArray()
+    .then(results => {
+      res.render('produce.ejs')
+    })
+    .catch(error => console.error(error))
+})
+app.get('/Contact', (req, res) => {
+  db.collection('Plants').find().toArray()
+    .then(results => {
+      res.render('contact.ejs')
+    })
+    .catch(error => console.error(error))
+})
+//Admin page view
+  app.get('/Admin Page', (req, res) => {
     db.collection('Plants').find().toArray()
       .then(results => {
-        // Similar to sendFile above accept we do not need to specify the
-        // directory. It works just find I suppose
         res.render('inventoryTest.ejs', {plants: results})
       })
       .catch(error => console.error(error))
@@ -90,6 +135,11 @@ MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net
       .catch(error => console.error(error))
 
   })
+  app.post('/Login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/Login',
+    failureFlash: true
+  }))
 
   // TODO: Create admin login route
   //  AdminLogin Route

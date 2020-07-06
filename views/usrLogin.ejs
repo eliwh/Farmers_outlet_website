@@ -8,13 +8,16 @@
 </head>
 <body>
   <h1>Login Page</h1>
+  <% if (messages.error) { %>
+  <%= messages.error %>
+  <% } %>
   <h2>Login</h2>
   <form >
-    <label for="">Username or Email</label>
-    <input type="text" name="" value="">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" required>
     <br>
     <label for="">Password</label>
-    <input type="password" name="" value="">
+    <input type="password" name="password" id="passport" required>
     <button type="Submit" name="button">Login</button>
   </form>
   <p>Need an account?</p>
