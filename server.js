@@ -10,12 +10,11 @@ const multer = require('multer');
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-const initializePassport = require('./passport-config.js')
-
-
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
-
+const initializePassport = require('./passport-config.js')
+// DB config
+const db = require('./config/keys').MongoURI
 // Body parser needs to be added before crud handlers
 // C = Create | POST
 // R = Read | GET
@@ -26,6 +25,7 @@ const app = express();
     // ========================
     // Middlewares
     // ========================
+
     app.set('view engine', 'ejs')
     app.use(bodyParser.urlencoded({ extended: false }))
     app.use(bodyParser.json())
@@ -39,55 +39,55 @@ const app = express();
     app.use(passport.initialize())
     app.use(passport.session())
 
+// NOTE: Connecting to mongoose here. testing to see if we can have two mongo conenctions, one for a mongoose model for UserSchema
+// and one for just all the other stuffs
+mongoose.set('useUnifiedTopology', true)
+mongoose.connect(db, {useNewUrlParser:true})
+const User = require('./models/User')
+console.log(User);
 // Here we are connectng to MongoDB. All of our CRUD operations
 // are going to be done within the mongodb function
 app.use(bodyParser.urlencoded({extended : true}));
-MongoClient.connect('mongodb+srv://ehernandez:4TCTAp!!@tfo-tfs-vvepn.mongodb.net/tfsInventory?retryWrites=true&w=majority',
- {useUnifiedTopology: true},(err, client) => {
+MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   if(err) return console.error(err);
-  console.log("Connected to MongoDB");
-  var db = client.db("tfsInventory");
+  console.log("Connected to MongoDB...");
+  var inventory = client.db("tfsInventory");
   var usersDB = client.db("userAccounts");
-  const plantsCollection = db.collection("Plants");
+  const plantsCollection = inventory.collection("Plants");
   const accountsCollection = usersDB.collection("Users");
 
   initializePassport(
     passport,
-    email => accountsCollection.findOne({email: req.body.email}),
-    id => accountsCollection.findOne({_id: req.body.id})
+    email => accountsCollection.findOne(user => user.email == email),
+    id => accountsCollection.findOne(user => user.id == id)
   )
 
-  app.listen(3000, function(){
-    console.log('Listening on 3000');
-  });
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, console.log(`Listening on port ${PORT}...`));
 
 
-//Home page (Currently admin inventory)
+//Home page
 app.get('/', (req, res) => {
-  db.collection('Plants').find().toArray()
-    .then(results => {
-      res.render('home.ejs')
-    })
-    .catch(error => console.error(error))
+  res.render('home.ejs')
 })
 
 app.get('/Produce', (req, res) => {
-  db.collection('Plants').find().toArray()
+  inventory.collection('Plants').find().toArray()
     .then(results => {
       res.render('produce.ejs')
     })
     .catch(error => console.error(error))
 })
 app.get('/Contact', (req, res) => {
-  db.collection('Plants').find().toArray()
+  inventory.collection('Plants').find().toArray()
     .then(results => {
       res.render('contact.ejs')
     })
     .catch(error => console.error(error))
 })
 //Admin page view
-  app.get('/Admin Page', (req, res) => {
-    db.collection('Plants').find().toArray()
+  app.get('/AdminPage', (req, res) => {
+    inventory.collection('Plants').find().toArray()
       .then(results => {
         res.render('inventoryTest.ejs', {plants: results})
       })
@@ -122,18 +122,70 @@ app.get('/Contact', (req, res) => {
           res.redirect('/Login')
         }).catch(error => console.log(error))
   });
+  // const { name, email, password, password2 } = req.body;
+  // let errors = [];
+  //
+  // if (!name || !email || !password || !password2) {
+  //   errors.push({ msg: 'Please enter all fields' });
+  // }
+  //
+  // if (password != password2) {
+  //   errors.push({ msg: 'Passwords do not match' });
+  // }
+  //
+  // if (password.length < 6) {
+  //   errors.push({ msg: 'Password must be at least 6 characters' });
+  // }
+  //
+  // if (errors.length > 0) {
+  //   res.render('usrLogin.ejs', {
+  //     errors: reqerrors,
+  //     name: name,
+  //     email,
+  //     password,
+  //     password2
+  //   });
+  // } else {
+  //   accountsCollection.findOne({ email: email }).then(user => {
+  //     if (user) {
+  //       errors.push({ msg: 'Email already exists' });
+  //       res.render('usrLogin.ejs', {
+  //         errors,
+  //         name,
+  //         email,
+  //         password,
+  //         password2
+  //       });
+  //     } else {
+  //       const newUser = new User({
+  //         name,
+  //         email,
+  //         password
+  //       });
+  //
+  //         //Hashing password for security
+  //         bcrypt.genSalt(10, (err,salt)=>
+  //           bcrypt.hash(newUser.password, salt, (err,hash)=>{
+  //             if (err) throw err;
+  //             // Setting the password to the hashed password
+  //             newUser.password = hash
+  //             // Save user to mongodb
+  //             accountsCollection.insertOne(newUser)
+  //             .then(user =>{
+  //               res.redirect('/login')
+  //             })
+  //             .catch(err => console.log(err))
+  //         }))
+  //       }
+  //     })
+  //     .catch()
+  //   }
+  // });
 
   // TODO: Create login route
   // Login Route
   app.get('/Login', (req,res) => {
-    usersDB.collection('Users').find().toArray()
-      .then(results  => {
-        // Similar to sendFile above accept we do not need to specify the
-        // directory. It works just find I suppose
-        res.render('usrLogin.ejs')
-      })
-      .catch(error => console.error(error))
-
+    res.render('usrLogin.ejs')
   })
   app.post('/Login', passport.authenticate('local', {
     successRedirect: '/',
