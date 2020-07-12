@@ -4,16 +4,16 @@ const bcrypt = require('bcrypt')
 
 
 // Loads in user model
-const User = require('../models/User')
+const User = require('../models/userModel')
 
 module.exports = function (passport){
   passport.use(
-    new.LocalStrategy({usernameField: 'email'}, (email, password, done)=>{
+    new LocalStrategy({usernameField: 'username'}, (username, password, done)=>{
       //Match user
-      User.findOne({email: email})
+      User.findOne({username: username})
       .then(user=>{
         if(!user){
-          return done(null, false {message: 'That email is not register'})
+          return done(null, false, {message: 'That email is not register'})
         }
         //Match password
         bcrypt.compare(password, user.password, (err, isMatch)=>{
@@ -25,7 +25,7 @@ module.exports = function (passport){
           }
         })
       })
-      .catch(err=>console.log(err);)
+      .catch(err=>console.log(err));
     })
   )
 
