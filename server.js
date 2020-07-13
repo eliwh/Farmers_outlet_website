@@ -21,6 +21,7 @@ const db = require('./config/keys').MongoURI
     app.use(bodyParser.json())
     app.use(express.static('public'))
     app.use('/Users', require('./routes/userRoute'))
+    app.use('/Admin', require('./routes/adminRoute'))
 
 // Here we are connectng to MongoDB. All of our CRUD operations
 // are going to be done within the mongodb function
@@ -29,9 +30,7 @@ MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   if(err) return console.error(err);
   console.log("Connected to MongoDB...");
   var inventory = client.db("tfsInventory");
-  var usersDB = client.db("userAccounts");
   const plantsCollection = inventory.collection("Plants");
-  const accountsCollection = usersDB.collection("Users");
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, console.log(`Listening on port ${PORT}...`));

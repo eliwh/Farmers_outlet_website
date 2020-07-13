@@ -24,16 +24,9 @@ mongoose.connect(db, {useNewUrlParser: true})
 app.get("/Login", (req,res) =>{
   res.render("login.ejs")
 })
-app.get("/Admin", (req,res) =>{
-  res.render("adminLogin.ejs")
-})
-app.get("/home", (req,res) =>{
-  res.render("home.ejs")
-})
-app.get("/Failure", (req,res) =>{
-  res.render("failure.ejs")
-})
-
+// app.get("/Admin", (req,res) =>{
+//   res.render("adminLogin.ejs")
+// })
 app.get('/Register', (req,res)=>{
   res.render("register.ejs")
 })
@@ -41,8 +34,8 @@ app.get('/Register', (req,res)=>{
 // Login Handle
 app.post('/Login', (req,res, next)=>{
   passport.authenticate('local',{
-    successRedirect: '/home', // NOTE: needs work
-    failureRedirect: '/Users/Login'
+    successRedirect: '/', //On success redirect to home
+    failureRedirect: '/Users/Login' //On failure redirect back to login page
   })(req,res,next);
 })
 module.exports = app
@@ -66,7 +59,7 @@ app.post('/register', (req,res)=>{
     // Save user to mongodb under userAccounts -> users
     newUser.save()
     .then(user =>{
-    res.redirect('/')
+    res.redirect('/Users/Login')
     })
     .catch(err => console.log(err))
     }))
