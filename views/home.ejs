@@ -1,18 +1,23 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>The Flower Stop</title>
-<div action"home" method"post" class="navi">
-  <a href=about.html>About</a>
-  <a href=blog.html>Blog</a>
-  <a href="http://localhost:3000/Contact">Contact Us</a>
-  <a href="http://localhost:3000/Produce">Produce</a>
-  <a href="http://localhost:3000/Users/Login">Login</a>
-  <a href="http://localhost:3000/Users/Blog">Blog</a>
-</div>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Flower Stop</title>
+
+  <div action"home" method"post" class="navi">
+    <a href=about.html>About</a>
+    <a href=blog.html>Blog</a>
+    <a href="http://localhost:3000/Contact">Contact Us</a>
+    <a href="http://localhost:3000/Produce">Produce</a>
+    <a href="http://localhost:3000/Users/Login">Login</a>
+    <a href="http://localhost:3000/Blog">Blog</a>
+    <p>Hi <%=name %></p>
+    <form class="" action="/Users/logout?_method=DELETE" method="post">
+      <button type="submit" name="button">Logout</button>
+    </form>
+
 </body>
 </html>
 <!-- Hi -->

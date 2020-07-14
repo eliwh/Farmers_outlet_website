@@ -1,18 +1,36 @@
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config()
+}
 const express = require ('express');
 const app = express()
+const flash = require('express-flash')
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const bcrypt = require ('bcrypt');
-const passport = require('passport')
 const session = require('express-session')
+const ejs = require('ejs');
+const ejsLint = require('ejs-lint');
+const methodOverride = require('method-override')
 const MongoClient = require('mongodb').MongoClient;
-// DB config
+
 const db = require('./config/keys').MongoURI
+
+//passport and authentication config
+const passport = require('passport')
+const authUser = new passport.Passport();
+require('./config/passport.js')(authUser)
+const adminPassport = new passport.Passport();
+require('./config/passport.js')(adminPassport)
+const {checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
+
 // Body parser needs to be added before crud handlers
 // C = Create | POST
 // R = Read | GET
 // U = Update | PUT
 // D = Delete | Self explanatory fam
+
+
+
     // ========================
     // Middlewares
     // ========================
@@ -20,12 +38,22 @@ const db = require('./config/keys').MongoURI
     app.use(bodyParser.urlencoded({ extended: false }))
     app.use(bodyParser.json())
     app.use(express.static('public'))
+    app.use(session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false
+    }))
+    // app.use(adminPassport.initialize())
+    // app.use(adminPassport.session())
+    app.use(authUser.initialize())
+    app.use(authUser.session())
+    app.use(methodOverride('_method'))
     app.use('/Users', require('./routes/userRoute'))
     app.use('/Admin', require('./routes/adminRoute'))
 
+
 // Here we are connectng to MongoDB. All of our CRUD operations
 // are going to be done within the mongodb function
-app.use(bodyParser.urlencoded({extended : true}));
 MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   if(err) return console.error(err);
   console.log("Connected to MongoDB...");
@@ -35,10 +63,13 @@ MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, console.log(`Listening on port ${PORT}...`));
 
-
 //Home page
-app.get('/', (req, res) => {
-  res.render('home.ejs')
+app.get('/',checkAuthenticated,(req, res) => {
+  res.render('home.ejs', {name: req.user.username})
+})
+
+app.get('/Blog', (req, res) => {
+  res.render('blog.ejs')
 })
 
 app.get('/Produce', (req, res) => {
@@ -56,19 +87,19 @@ app.get('/Contact', (req, res) => {
     .catch(error => console.error(error))
 })
 //Admin page view
-  app.get('/AdminPage', (req, res) => {
-    inventory.collection('Plants').find().toArray()
+app.get('/AdminPage', (req, res) => {
+  inventory.collection('Plants').find().toArray()
       .then(results => {
-        res.render('inventory.ejs', {plants: results})
-      })
-      .catch(error => console.error(error))
-  })
+      res.render('inventory.ejs', {plants: results})
+    })
+    .catch(error => console.error(error))
+})
 //Inventory Routes
 // NOTE: done
   app.post("/plants", (req, res) => {
     plantsCollection.insertOne(req.body).then(
       result => {
-        res.redirect('/')
+        res.redirect('/AdminPage')
       }).catch(error => console.error(error))
   });
 
