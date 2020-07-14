@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+  body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+
+
+</style>
+</head>
+<body>
+
+<div class="bloginput">
+  <form action="blog_submit.php">
+
+
+
+
+   <div class="row">
+        <label for="name">Name</label>
+              <div class="col-75">
+
+        <input type="text" id="name" name="fullname" placeholder="Your name">
+      </div>
+    </div>
+    <div class="row">
+		<div class="col-25">
+        <label for="title">Title</label>
+	</div>
+        <input type="text" id="title" name="title" placeholder="Name of your post">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="subject">Content</label>
+      </div>
+      <div class="col-75">
+        <textarea id="subject" name="subject" placeholder="Write your post here" style="height:350px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+
+
+</body>
+</html>
