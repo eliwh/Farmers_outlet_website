@@ -9,7 +9,6 @@ const mongoose = require ('mongoose');
 const bcrypt = require ('bcrypt');
 const session = require('express-session')
 const ejs = require('ejs');
-const ejsLint = require('ejs-lint');
 const methodOverride = require('method-override')
 const MongoClient = require('mongodb').MongoClient;
 
