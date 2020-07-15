@@ -13,9 +13,25 @@
 
   .image {
     background: url('/images/hmbkg.jpg') no-repeat center;
-    background-size: cover;
+    /* background-size: cover;
     height: 500px;
+    position: relative;  @Elijah has got you're back my g ;D*/
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     position: relative;
+    z-index: 1;
   }
 
   .text {
@@ -56,17 +72,19 @@
 
    <ul>
    <div action"home" method"post" class="navi">
-     <li><a href=about.html>About</a>
-     <li><a href=blog.html>Blog</a>
-     <li><a href="http://localhost:3000/Contact">Contact Us</a>
-     <li><a href="http://localhost:3000/Produce">Produce</a>
-     <li><a href="http://localhost:3000/Users/Login">Login</a>
-     <li><a href="http://localhost:3000/Blog">Blog</a>
+      <li><a href=about.html>About</a>
+      <li><a href="http://localhost:3000/Contact">Contact Us</a>
+      <li><a href="http://localhost:3000/Produce">Produce</a>
+      <li><a href="http://localhost:3000/Blog">Blog</a>
+      <li><a href="http://localhost:3000/Request">Request</a>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+
+       <li>Hi <%=name %>
+       <form class="" action="/Users/logout?_method=DELETE" method="post">
+         <button type="submit" name="button">Logout</button>
+       </form>
+       </li>
      </ul>
-    <p>Hi <%=name %></p>
-    <form class="" action="/Users/logout?_method=DELETE" method="post">
-      <button type="submit" name="button">Logout</button>
-    </form>
 
     <div class="image">
       <div class="text">

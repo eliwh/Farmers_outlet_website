@@ -10,6 +10,7 @@ const bcrypt = require ('bcrypt');
 const session = require('express-session')
 const ejs = require('ejs');
 const methodOverride = require('method-override')
+const FileStore = require('session-file-store')(session);
 const MongoClient = require('mongodb').MongoClient;
 
 const db = require('./config/keys').MongoURI
@@ -20,7 +21,7 @@ const authUser = new passport.Passport();
 require('./config/passport.js')(authUser)
 const adminPassport = new passport.Passport();
 require('./config/passport.js')(adminPassport)
-const {checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
+const {checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
 
 // Body parser needs to be added before crud handlers
 // C = Create | POST
@@ -38,9 +39,13 @@ const {checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
     app.use(bodyParser.json())
     app.use(express.static('public'))
     app.use(session({
-      secret: process.env.SESSION_SECRET,
+      store: new FileStore,
+      secret: process.env.USER_SESSION_SECRET,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
+      cookie:{
+        expires: false
+      }
     }))
     // app.use(adminPassport.initialize())
     // app.use(adminPassport.session())
@@ -70,11 +75,13 @@ app.get('/',checkAuthenticated,(req, res) => {
 app.get('/Blog', (req, res) => {
   res.render('blog.ejs')
 })
-
+app.get('/Request', (req, res) => {
+  res.render('request.ejs')
+})
 app.get('/Produce', (req, res) => {
   inventory.collection('Plants').find().toArray()
     .then(results => {
-      res.render('produce.ejs')
+      res.render('produce.ejs',{name: req.user.username})
     })
     .catch(error => console.error(error))
 })
@@ -86,6 +93,7 @@ app.get('/Contact', (req, res) => {
     .catch(error => console.error(error))
 })
 //Admin page view
+// NOTE: Cannot protect this page yet, thinking that there will need to be two sessions
 app.get('/AdminPage', (req, res) => {
   inventory.collection('Plants').find().toArray()
       .then(results => {
