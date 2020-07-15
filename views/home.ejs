@@ -5,14 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The Flower Stop</title>
+  <style>
+  ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #333;
+   }
 
-  <div action"home" method"post" class="navi">
-    <a href=about.html>About</a>
-    <a href=blog.html>Blog</a>
-    <a href="http://localhost:3000/Contact">Contact Us</a>
-    <a href="http://localhost:3000/Produce">Produce</a>
-    <a href="http://localhost:3000/Users/Login">Login</a>
-    <a href="http://localhost:3000/Blog">Blog</a>
+   li {
+     float: left;
+   }
+
+   li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+   }
+
+   li a:hover {
+     background-color: #f1f1f1;
+   }
+   </style>
+   </head>
+   <body>
+
+   <ul>
+   <div action"home" method"post" class="navi">
+     <li><a href=about.html>About</a>
+     <li><a href=blog.html>Blog</a>
+     <li><a href="http://localhost:3000/Contact">Contact Us</a>
+     <li><a href="http://localhost:3000/Produce">Produce</a>
+     <li><a href="http://localhost:3000/Users/Login">Login</a>
+     <li><a href="http://localhost:3000/Blog">Blog</a>
+     </ul>
     <p>Hi <%=name %></p>
     <form class="" action="/Users/logout?_method=DELETE" method="post">
       <button type="submit" name="button">Logout</button>
