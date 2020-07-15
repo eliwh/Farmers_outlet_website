@@ -4,11 +4,11 @@
     <head>
     <meta charset="utf-8">
     <title>Products</title>
-    <link href="Produce.css" rel="stylesheet">
+    <link href="/CSS/Produce.css" rel="stylesheet">
     <h1><center>Products</center></h1>
   </head>
                 <!--Background-->
- <body background= "Background.jpeg">
+ <body background= "/images/Background.jpeg">
 
    <!--Navigation Bar
    <nav>
@@ -21,13 +21,19 @@
      </ul>
    </nav>-->
 
-   <div class="navbar">
+
+<div class="navbar">
   <a class="active" href="#">Home</a>
   <a href="#">Products</a>
   <a href="#">About Us</a>
   <a href="#">Blog</a>
   <a href="#">Contact Us</a>
-  <a href="#">Login</a>
+  <li>Logged In As
+    <%=name %>
+  <form class="" action="/Users/logout?_method=DELETE" method="post">
+    <button type="submit" name="button">Logout</button>
+  </form>
+  </li>
 </div>
 
 
@@ -38,13 +44,13 @@
  <tr>
 
  <td align="center" valign="center">
- <img src="pink.jpeg" alt="description here" />
+ <img src="/images/pink.jpeg" alt="description here" />
  <br />
  Pink Flower ---> $$$
  </td>
 
  <td align="center" valign="center">
- <img src="purple.jpeg" alt="description here" />
+ <img src="/images/purple.jpeg" alt="description here" />
  <br />
  Purple Flower ---> $$$
  </td>
@@ -52,13 +58,13 @@
 
 <tr>
  <td align="center" valign="center">
- <img src="red.jpeg"  alt="description here" />
+ <img src="/images/red.jpeg"  alt="description here" />
  <br />
  Red Flower ---> $$$
  </td>
 
  <td align="center" valign="center">
- <img src="psunf.jpeg"  alt="description here" />
+ <img src="/images/psunf.jpeg"  alt="description here" />
  <br />
  Purple Sunflower ---> $$$
 </td>

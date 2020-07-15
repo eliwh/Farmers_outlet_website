@@ -7,6 +7,8 @@ const session = require('express-session');
 const flash = require('express-flash')
 const adminPassport = require('passport')
 require('../config/adminPassport.js')(adminPassport)
+const {checkAdminAuthenticated, checkAuthenticated, checkNotAuthenticated} = require('../config/auth')
+
 
 // DB config
 const db = require('../config/keys').userURI
@@ -17,13 +19,16 @@ app.use(flash())
 
 //connect to mongodb
 mongoose.set('useUnifiedTopology', true)
-mongoose.connect(db, {useNewUrlParser: true})
+// mongoose.connect(db, {useNewUrlParser: true})
 
-app.get("/SignIn", (req,res) =>{
+app.get("/SignIn", checkNotAuthenticated,(req,res) =>{
   res.render("adminLogin.ejs")
 })
+app.get("/Orders", checkAdminAuthenticated,  (req,res) =>{
+  res.render("orders.ejs")
+})
 // Login Handle
-app.post('/SignIn', (req,res, next)=>{
+app.post('/SignIn', checkNotAuthenticated, (req,res, next)=>{
   adminPassport.authenticate('local',{
     successRedirect: '/AdminPage', //On success redirect to home
     failureRedirect: '/Admin/SignIn', //On failure redirect back to login page

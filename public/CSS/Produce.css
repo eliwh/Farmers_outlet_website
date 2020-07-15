@@ -7,8 +7,22 @@ h1 {
 
 body {
  background-image: url('/images/Background.jpg');
+ width: 100%;
+ min-height: 100vh;
+ display: -webkit-box;
+ display: -webkit-flex;
+ display: -moz-box;
+ display: -ms-flexbox;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+ padding: 15px;
  background-repeat: no-repeat;
- background-size: 2000px 1000px;
+ background-size: cover;
+ background-position: center;
+ position: relative;
+ z-index: 1;
  }
 
 /*nav {
