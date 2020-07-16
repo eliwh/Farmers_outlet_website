@@ -28,14 +28,25 @@
   <a href="#">About Us</a>
   <a href="#">Blog</a>
   <a href="#">Contact Us</a>
-  <li>Logged In As
-    <%=name %>
-  <form class="" action="/Users/logout?_method=DELETE" method="post">
-    <button type="submit" name="button">Logout</button>
-  </form>
-  </li>
-</div>
 
+
+  <!-- Displays user login across the the page and allows non users to access it as well without
+  an error getting thrown in there face. Ask Elijah for more info. -->
+  <li>
+    <%if(locals.name){%>
+    welcome <%=name %>
+    <form class="" action="/Users/logout?_method=DELETE" method="post">
+      <button type="submit" name="button">Logout</button>
+    </form>
+    <%}else{%>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+    <%}%>
+  </li>
+  <!-------------------------------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------------------------------->
+
+</div>
 
 <!--table style-->
    <table width="500" border="0" cellpadding="5">
@@ -69,7 +80,6 @@
  Purple Sunflower ---> $$$
 </td>
  </tr>
-
  </table>
 
 

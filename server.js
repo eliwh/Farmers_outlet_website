@@ -72,29 +72,26 @@ app.get('/',(req, res) => {
   res.render('home.ejs', {name: req.user !== undefined ? req.user.username : ""})
 })
 
-app.get('/Blog', (req, res) => {
-  res.render('blog.ejs')
-})
-app.get('/Request', (req, res) => {
-  res.render('request.ejs')
-})
+// TODO: Implement blog
+app.get('/Blog', (req, res) => {res.render('blog.ejs')})
+
+// TODO: Implement contact
+app.get('/Contact', (req, res) => {  res.render('contact.ejs')})
+
+// TODO:  Implement request
+app.get('/Request', (req, res) => {res.render('request.ejs')})
+
 app.get('/Produce', (req, res) => {
   inventory.collection('Plants').find().toArray()
     .then(results => {
-      res.render('produce.ejs',{name: req.user.username})
+      res.render('produce.ejs',{name: req.user !== undefined ? req.user.username : ""})
     })
     .catch(error => console.error(error))
 })
-app.get('/Contact', (req, res) => {
-  inventory.collection('Plants').find().toArray()
-    .then(results => {
-      res.render('contact.ejs')
-    })
-    .catch(error => console.error(error))
-})
+
 //Admin page view
 // NOTE: Cannot protect this page yet, thinking that there will need to be two sessions
-app.get('/AdminPage', (req, res) => {
+app.get('/AdminPage', checkAdminAuthenticated, (req, res) => {
   inventory.collection('Plants').find().toArray()
       .then(results => {
       res.render('inventory.ejs', {plants: results})
