@@ -79,10 +79,13 @@
       <li><a href="http://localhost:3000/Request">Request</a>
       <li><a href="http://localhost:3000/Users/Login">Login</a>
 
-       <li>Hi <%=name %>
-       <form class="" action="/Users/logout?_method=DELETE" method="post">
-         <button type="submit" name="button">Logout</button>
-       </form>
+       <li>
+         <%if(locals.name){%>
+         welcome <%=name %>
+         <form class="" action="/Users/logout?_method=DELETE" method="post">
+           <button type="submit" name="button">Logout</button>
+         </form>
+         <%}%>
        </li>
      </ul>
 

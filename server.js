@@ -68,8 +68,8 @@ MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   app.listen(PORT, console.log(`Listening on port ${PORT}...`));
 
 //Home page
-app.get('/',checkAuthenticated,(req, res) => {
-  res.render('home.ejs', {name: req.user.username})
+app.get('/',(req, res) => {
+  res.render('home.ejs', {name: req.user !== undefined ? req.user.username : ""})
 })
 
 app.get('/Blog', (req, res) => {
