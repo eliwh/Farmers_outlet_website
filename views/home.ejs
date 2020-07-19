@@ -77,15 +77,6 @@
       <li><a href="http://localhost:3000/Produce">Produce</a>
       <li><a href="http://localhost:3000/Blog">Blog</a>
       <li><a href="http://localhost:3000/Request">Request</a>
-
-        <!-- Ask Elijah about this section if you need to.
-        Right here we are using EJS to get the users username
-        from the express session found in server.js(local.name).
-        From there we are determining if the username has been stored in
-        the session. If it is, then we can post the usersname and welcome them
-        and add the logout button for them/ remove the login button.  -->
-
-        <!-- @Derrick, needs to be styled, but this can wait, functionality is more important -->
        <li>
          <%if(locals.name){%>
          welcome <%=name %>
@@ -98,6 +89,14 @@
        </li>
      </ul>
 
+             <!-- Ask Elijah about this section if you need to.
+             Right here we are using EJS to get the users username
+             from the express session found in server.js(local.name).
+             From there we are determining if the username has been stored in
+             the session. If it is, then we can post the usersname and welcome them
+             and add the logout button for them/ remove the login button.  -->
+
+             <!-- @Derrick, needs to be styled, but this can wait, functionality is more important -->
     <div class="image">
       <div class="text">
         <h1 style="font-size:50px">The Flower Stop</h1>

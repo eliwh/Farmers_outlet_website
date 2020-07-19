@@ -54,6 +54,27 @@
   <!--===============================================================================================-->
 </head>
 <body>
+
+  <ul>
+  <div action"home" method"post" class="navi">
+     <li><a href=about.html>About</a>
+     <li><a href="http://localhost:3000/Contact">Contact Us</a>
+     <li><a href="http://localhost:3000/Produce">Produce</a>
+     <li><a href="http://localhost:3000/Blog">Blog</a>
+     <li><a href="http://localhost:3000/Request">Request</a>
+      <li>
+        <%if(locals.name){%>
+        welcome <%=name %>
+        <form class="" action="/Users/logout?_method=DELETE" method="post">
+          <button type="submit" name="button">Logout</button>
+        </form>
+        <%}else{%>
+          <li><a href="http://localhost:3000/Users/Login">Login</a>
+        <%}%>
+      </li>
+    </ul>
+
+
     <div class="contact1" style="background-image: url('/images/cherryBlossum.jpg');">
   		<div class="container-contact1">
   			<div class="contact1-pic js-tilt" data-tilt>
