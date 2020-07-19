@@ -74,8 +74,13 @@ MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, console.log(`Listening on port ${PORT}...`));
 
-app.get('/test', (req, res) => {res.render('product.ejs')})
-
+  app.get('/test', (req, res) => {
+    inventory.collection('Plants').find().toArray()
+        .then(results => {
+        res.render('product.ejs', {plants: results})
+      })
+      .catch(error => console.error(error))
+  })
 //Home page
 app.get('/',(req, res) => {
   res.render('home.ejs', {name: req.user !== undefined ? req.user.username : ""})
