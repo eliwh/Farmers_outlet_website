@@ -59,6 +59,34 @@ module.exports = app
 
 app.post('/register', checkNotAuthenticated, (req,res)=>{
   const { first_name, last_name, username, email, password, password2 } = req.body;
+  let errors = []
+  if(password != password2){
+    errors.push()
+    req.flash('error_msg','Passwords Do Not Match');
+  }
+  if(errors.length > 0){
+    res.render('Register',{
+      first_name,
+      last_name,
+      username,
+      email,
+      password,
+      password2
+    })
+  }else{
+    User.findOne({ username: username }).then(user => {
+      if (user) {
+        req.flash('error_msg','Username Taken');
+        res.render('Register', {
+          first_name,
+          last_name,
+          username,
+          email,
+          password,
+          password2
+        });
+      }
+else{
   const newUser = new User({
     // name,
     first_name,
@@ -67,6 +95,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
     email,
     password
   });
+
   //Hashing password for security
   bcrypt.genSalt(10, (err,salt)=>
   bcrypt.hash(newUser.password, salt, (err,hash)=>{
@@ -76,9 +105,12 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
     // Save user to mongodb under userAccounts -> users
     newUser.save()
     .then(user =>{
-    res.redirect('/Users/Login')
-    res.flash('success_msg', 'You are now registered')
+      req.flash('success_msg','You are now registered and can log in');
+      res.redirect('/Users/Login')
     })
     .catch(err => console.log(err))
     }))
+  }
+  });
+  }
 });

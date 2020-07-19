@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-    <meta charset="utf-8">
-    <title>Products</title>
-    <link href="/CSS/Produce.css" type="text/css" rel="stylesheet">
-    <h1><center>Products</center></h1>
-  </head>
-                <!--Background-->
- <body background= "/images/Background.jpeg">
+<head>
+  <meta charset="utf-8">
+  <title>Products</title>
+  <link href="/CSS/Produce.css" type="text/css" rel="stylesheet">
+  <h1>
+    <center>Market Place</center>
+  </h1>
+</head>
+<!--Background-->
 
-   <!--Navigation Bar
+<body background="/images/Background.jpeg" action="/plants" method="post">
+
+  <!--Navigation Bar
    <nav>
      <ul>
        <li><a href ="#"> Home </a></li>
@@ -22,25 +25,25 @@
    </nav>-->
 
 
-<div class="navbar">
-  <a class="active" href="#">Home</a>
-  <a href="#">Products</a>
-  <a href="#">About Us</a>
-  <a href="#">Blog</a>
-  <a href="#">Contact Us</a>
+  <div class="navbar">
+    <a class="active" href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">About Us</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact Us</a>
 
 
-  <!-- Displays user login across the the page and allows non users to access it as well without
+    <!-- Displays user login across the the page and allows non users to access it as well without
   an error getting thrown in there face. Ask Elijah for more info. -->
-  <li>
-    <%if(locals.name){%>
-    welcome <%=name %>
-    <form class="" action="/Users/logout?_method=DELETE" method="post">
-      <button type="submit" name="button">Logout</button>
-    </form>
-    <%}else{%>
-      <li><a href="http://localhost:3000/Users/Login">Login</a>
-    <%}%>
+    <li>
+      <%if(locals.name){%>
+      welcome <%=name %>
+      <form class="" action="/Users/logout?_method=DELETE" method="post">
+        <button type="submit" name="button">Logout</button>
+      </form>
+      <%}else{%>
+    <li><a href="http://localhost:3000/Users/Login">Login</a>
+      <%}%>
   </li>
   <!-------------------------------------------------------------------------------------------------------->
   <!-------------------------------------------------------------------------------------------------------->
@@ -49,10 +52,10 @@
 </div>
 
 <!--table style-->
-   <table width="500" border="0" cellpadding="5">
+<table width="500" border="0" cellpadding="5">
 
 <!--table with images-->
- <tr>
+<tr>
 
  <td align="center" valign="center">
  <img src="/images/pink.jpeg" alt="description here" />
@@ -74,21 +77,34 @@
  Red Flower ---> $$$
  </td>
 
+<!--------------------------------------------------------------------------------------------------------------------------->
+<!-- I know that the data held in this cell is not a rose. However, for the sake of the example, we are using ejs
+to search through the datbase for a document with the name Roses in it. If the querry returns true, then the image
+will be displayed if there are roses available, if there are no roses available, the image will be hidden until available
+again -->
+
+<!-- Ask Elijah if you have any questions or concerns. If you are curious about editing this out let him know -->
+<!---------------------------------------------------------------------------------------------------------------------------->
+<% for(var i = 0; i < plants.length; i++) {%>
+<% if(plants[i].Name == 'Roses') {%>
  <td align="center" valign="center">
  <img src="/images/psunf.jpeg"  alt="description here" />
  <br />
- Purple Sunflower ---> $$$
-</td>
- </tr>
- </table>
+      <p><%=plants[i].Name%>
+      In Stock:
+      <%=plants[i].Quantity%>
+      <%if(plants[i].Quantity < 5){%>
+        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
+    </p><br>
+      <p>$<%=plants[i].Price%></p>
+      </td>
+      <%}%>
+<%}%>
+      </tr>
+      </table>
 
 
-
- </body>
-
- <style>
-
-
-  </style>
+</body>
 
 </html>

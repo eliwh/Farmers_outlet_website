@@ -2,14 +2,14 @@ if(process.env.NODE_ENV !== 'production'){
   require('dotenv').config()
 }
 const express = require ('express');
-const app = express()
-const flash = require('express-flash')
+const app = express();
+const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const bcrypt = require ('bcrypt');
-const session = require('express-session')
+const session = require('express-session');
 const ejs = require('ejs');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 const FileStore = require('session-file-store')(session);
 const MongoClient = require('mongodb').MongoClient;
 
@@ -54,6 +54,13 @@ const {checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = requ
     app.use(methodOverride('_method'))
     app.use('/Users', require('./routes/userRoute'))
     app.use('/Admin', require('./routes/adminRoute'))
+    app.use(flash())
+    app.use(function(req, res, next) {
+      res.locals.success_msg = req.flash('success_msg');
+      res.locals.error_msg = req.flash('error_msg');
+      next();
+    });
+
 
 
 // Here we are connectng to MongoDB. All of our CRUD operations
@@ -84,14 +91,18 @@ app.get('/Request', (req, res) => {res.render('request.ejs')})
 app.get('/Produce', (req, res) => {
   inventory.collection('Plants').find().toArray()
     .then(results => {
-      res.render('produce.ejs',{name: req.user !== undefined ? req.user.username : ""})
+      if(req.user !== undefined){
+        res.render('produce.ejs',{plants: results},{name: req.user.username })
+      }
+      res.render('produce.ejs',{plants: results})
+      // ,{name: req.user !== undefined ? req.user.username : ""}
     })
     .catch(error => console.error(error))
 })
 
 //Admin page view
 // NOTE: Cannot protect this page yet, thinking that there will need to be two sessions
-app.get('/AdminPage', checkAdminAuthenticated, (req, res) => {
+app.get('/AdminPage', (req, res) => {
   inventory.collection('Plants').find().toArray()
       .then(results => {
       res.render('inventory.ejs', {plants: results})
@@ -121,7 +132,8 @@ app.get('/AdminPage', checkAdminAuthenticated, (req, res) => {
         $set: {
           Type: req.body.type,
           Name: req.body.name,
-          Quantity: req.body.quantity
+          Quantity: req.body.quantity,
+          Price: req.body.Price
         }
       }
     )

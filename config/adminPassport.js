@@ -1,10 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 
 // Loads in user model
-const Admin = require('../models/adminModel')
+const Admin = require('../models/adminModel');
 
 module.exports = function (adminPassport){
   adminPassport.use(
@@ -13,21 +13,21 @@ module.exports = function (adminPassport){
       Admin.findOne({username: username})
       .then(user=>{
         if(!user){
-          return done(null, false, {message: 'That username is not register'})
+          return done(null, false, {message: 'That username is not register'});
         }
         //Match password
         bcrypt.compare(password, user.password, (err, isMatch)=>{
           if(err) throw err;
           if (isMatch) {
-            return done(null, user)
+            return done(null, user);
           }else {
-            return done(null, false, {message: 'Incorrect password'})
+            return done(null, false, {message: 'Incorrect password'});
           }
-        })
+        });
       })
       .catch(err=>console.log(err));
     })
-  )
+  );
 
   adminPassport.serializeUser((user, done) =>{
     done(null, user.id);
