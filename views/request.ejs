@@ -55,8 +55,53 @@
   <!--===============================================================================================-->
 </head>
 <body>
+  ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #333;
+   }
 
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/views/"; include($IPATH."nav.html"); ?>
+   li {
+     float: left;
+   }
+
+   li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+   }
+
+   li a:hover {
+     background-color: #f1f1f1;
+   }
+   </style>
+   </head>
+   <body>
+
+   <ul>
+   <div action"home" method"post" class="navi">
+      <li><a href=about.html>About</a>
+      <li><a href="http://localhost:3000/Contact">Contact Us</a>
+      <li><a href="http://localhost:3000/Produce">Produce</a>
+      <li><a href="http://localhost:3000/Blog">Blog</a>
+      <li><a href="http://localhost:3000/Request">Request</a>
+       <li>
+         <%if(locals.name){%>
+         welcome <%=name %>
+         <form class="" action="/Users/logout?_method=DELETE" method="post">
+           <button type="submit" name="button">Logout</button>
+         </form>
+         <%}else{%>
+           <li><a href="http://localhost:3000/Users/Login">Login</a>
+         <%}%>
+       </li>
+     </ul>
+
+
 
     <div class="contact1" style="background-image: url('/images/cherryBlossum.jpg');">
   		<div class="container-contact1">
