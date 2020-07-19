@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +38,7 @@ body{
 
 
 
-<body action="test" method="post">
+<body action="/plants" method="post">
   <div class="card">
     <h1>Pink Flower</h1>
     <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
@@ -46,14 +47,28 @@ body{
 
   </div>
 
-  <body action="test" method="post">
-    <div class="card">
-      <h1>Pink Flower</h1>
-      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
-      <p class="price">$19.99</p>
-      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-
-    </div>
+  <div class="card">
+    <table>
+      <% for(var i = 0; i < plants.length; i++) {%>
+      <% if(plants[i].Name == 'Roses') {%>
+      <td align="center" valign="center">
+        <h1><%=plants[i].Name%></h1>
+        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+        <p>
+          In Stock:
+          <%=plants[i].Quantity%>
+          <%if(plants[i].Quantity < 5){%>
+        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+        <%}%>
+            </p><br>
+              <p class="price" >$<%=plants[i].Price%></p>
+        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      </td>
+      <%}%>
+        <%}%>
+      </tr>
+    </table>
+  </div>
 </body>
 
 </html>
