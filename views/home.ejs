@@ -1,103 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The Flower Stop</title>
   <style>
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  .image {
-    background: url('/images/hmbkg.jpg') no-repeat center;
-    /* background-size: cover;
+    .image {
+      background: url('/images/hmbkg.jpg') no-repeat center;
+      /* background-size: cover;
     height: 500px;
     position: relative;  @Elijah has got you're back my g ;D*/
-    width: 100%;
-    min-height: 100vh;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    z-index: 1;
-  }
+      width: 100%;
+      min-height: 100vh;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      z-index: 1;
+    }
 
-  .text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
+    .text {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
 
-  ul {
-     list-style-type: none;
-     margin: 0;
-     padding: 0;
-     overflow: hidden;
-     background-color: #333;
-   }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
 
-   li {
-     float: left;
-   }
+    li {
+      float: left;
+    }
 
-   li a {
-     display: block;
-     color: white;
-     text-align: center;
-     padding: 14px 16px;
-     text-decoration: none;
-   }
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
-   li a:hover {
-     background-color: #f1f1f1;
-   }
-   </style>
-   </head>
-   <body>
+    li a:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
 
-   <ul>
-   <div action"home" method"post" class="navi">
+<body>
+
+  <ul>
+    <div action"home" method"post" class="navi">
       <li><a href=about.html>About</a>
       <li><a href="http://localhost:3000/Contact">Contact Us</a>
       <li><a href="http://localhost:3000/Produce">Produce</a>
       <li><a href="http://localhost:3000/Blog">Blog</a>
       <li><a href="http://localhost:3000/Request">Request</a>
-
-        <!-- Ask Elijah about this section if you need to.
-        Right here we are using EJS to get the users username
-        from the express session found in server.js(local.name).
-        From there we are determining if the username has been stored in
-        the session. If it is, then we can post the usersname and welcome them
-        and add the logout button for them/ remove the login button.  -->
-
-        <!-- @Derrick, needs to be styled, but this can wait, functionality is more important -->
-       <li>
-         <%if(locals.name){%>
-         welcome <%=name %>
-         <form class="" action="/Users/logout?_method=DELETE" method="post">
-           <button type="submit" name="button">Logout</button>
-         </form>
-         <%}else{%>
-           <li><a href="http://localhost:3000/Users/Login">Login</a>
-         <%}%>
+      <li><a href="http://localhost:3000/test">test</a>
+      <li>
+        <%if(locals.name){%>
+        welcome <%=name %>
+        <form class="" action="/Users/logout?_method=DELETE" method="post">
+          <button type="submit" name="button">Logout</button>
+        </form>
+        <%}else{%>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+        <%}%>
        </li>
      </ul>
 
+             <!-- Ask Elijah about this section if you need to.
+             Right here we are using EJS to get the users username
+             from the express session found in server.js(local.name).
+             From there we are determining if the username has been stored in
+             the session. If it is, then we can post the usersname and welcome them
+             and add the logout button for them/ remove the login button.  -->
+
+             <!-- @Derrick, needs to be styled, but this can wait, functionality is more important -->
     <div class="image">
       <div class="text">
         <h1 style="font-size:50px">The Flower Stop</h1>
