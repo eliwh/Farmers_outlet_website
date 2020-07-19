@@ -140,7 +140,8 @@ app.get('/AdminPage', (req, res) => {
           Type: req.body.type,
           Name: req.body.name,
           Quantity: req.body.quantity,
-          Price: req.body.Price
+          Price: req.body.Price,
+          Description: req.body.description
         }
       }
     )

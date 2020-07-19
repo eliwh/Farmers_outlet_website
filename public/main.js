@@ -17,6 +17,8 @@ update.addEventListener('click', _ => {
   console.log(quantity);
   let price = document.getElementById("price").value;
   console.log(price);
+  let description = document.getElementById("price").value;
+  console.log(description);
 
   fetch('/Plants', {
     method: 'put',
@@ -28,7 +30,8 @@ update.addEventListener('click', _ => {
       type: type,
       name: name,
       quantity: quantity,
-      price: price
+      price: price,
+      description: description
     })
   })
     .then(res => {

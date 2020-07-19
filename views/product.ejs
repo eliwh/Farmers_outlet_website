@@ -30,6 +30,7 @@
       <%}%>
      </li>
    </ul>
+
 <style>
 body{
   background-image: url("/images/productbkg.jpg");}
@@ -41,24 +42,86 @@ body{
         <div class="card">
 
         <% for(var i = 0; i < plants.length; i++) {%>
-        <% if(plants[i].Name == 'Roses') {%>
-        <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
-        <p>
-          In Stock:
-          <%=plants[i].Quantity%>
-          <%if(plants[i].Quantity < 5){%>
-        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
-        <%}%>
+      <% if(plants[i].Name == 'Roses') {%>
+      <h1><%=plants[i].Name%></h1>
+      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <p>
+        In Stock:
+        <%=plants[i].Quantity%>
+        <%if(plants[i].Quantity < 5){%>
+      <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-        <%}%>
+      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <%}%>
+          <%}%>
+  </div>
+  </td>
+  <td>
+    <div class="card">
+
+      <% for(var i = 0; i < plants.length; i++) {%>
+      <% if(plants[i].Name == 'Roses') {%>
+      <h1><%=plants[i].Name%></h1>
+      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <p>
+        In Stock:
+        <%=plants[i].Quantity%>
+        <%if(plants[i].Quantity < 5){%>
+      <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
+        </p>
+        <p class="price" >$<%=plants[i].Price%></p>
+      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <%}%>
           <%}%>
     </div>
-    </td>
-      <td>
-        <div class="card">
+  </td>
+  <td>
+    <div class="card">
+
+      <% for(var i = 0; i < plants.length; i++) {%>
+      <% if(plants[i].Name == 'Roses') {%>
+      <h1><%=plants[i].Name%></h1>
+      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <p>
+        In Stock:
+        <%=plants[i].Quantity%>
+        <%if(plants[i].Quantity < 5){%>
+      <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
+        </p>
+        <p class="price" >$<%=plants[i].Price%></p>
+      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <%}%>
+          <%}%>
+    </div>
+  </td>
+  <td>
+    <div class="card">
+
+      <% for(var i = 0; i < plants.length; i++) {%>
+      <% if(plants[i].Name == 'Roses') {%>
+      <h1><%=plants[i].Name%></h1>
+      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <p>
+        In Stock:
+        <%=plants[i].Quantity%>
+        <%if(plants[i].Quantity < 5){%>
+      <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
+        </p>
+        <p class="price" >$<%=plants[i].Price%></p>
+      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <%}%>
+          <%}%>
+    </div>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="card">
 
         <% for(var i = 0; i < plants.length; i++) {%>
         <% if(plants[i].Name == 'Roses') {%>
@@ -75,12 +138,10 @@ body{
         <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
         <%}%>
           <%}%>
-    </div>
+      </div>
     </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="card">
+    <td>
+      <div class="card">
 
         <% for(var i = 0; i < plants.length; i++) {%>
         <% if(plants[i].Name == 'Roses') {%>
@@ -97,29 +158,9 @@ body{
         <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
         <%}%>
           <%}%>
-    </div>
+      </div>
     </td>
-      <td>
-        <div class="card">
-
-        <% for(var i = 0; i < plants.length; i++) {%>
-        <% if(plants[i].Name == 'Roses') {%>
-        <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
-        <p>
-          In Stock:
-          <%=plants[i].Quantity%>
-          <%if(plants[i].Quantity < 5){%>
-        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
-        <%}%>
-        </p>
-        <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-        <%}%>
-          <%}%>
-    </div>
-    </td>
-    </tr>
+  </tr>
   </table>
 
 
