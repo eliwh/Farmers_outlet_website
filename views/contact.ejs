@@ -27,8 +27,28 @@
     <link rel="stylesheet" type="text/css" href="/CSS/contactUtil.css">
     <link rel="stylesheet" type="text/css" href="/CSS/contact.css">
   <!--===============================================================================================-->
+  <link href="/CSS/nav.css" rel="stylesheet">
 </head>
 <body>
+<ul>
+  <div action"home" method"post" class="navi">
+    <li><a href=about.html>About</a>
+    <li><a href="http://localhost:3000/Contact">Contact Us</a>
+    <li><a href="http://localhost:3000/Produce">Produce</a>
+    <li><a href="http://localhost:3000/Blog">Blog</a>
+    <li><a href="http://localhost:3000/Request">Request</a>
+    <li><a href="http://localhost:3000/test">test</a>
+    <li>
+      <%if(locals.name){%>
+      welcome <%=name %>
+      <form class="" action="/Users/logout?_method=DELETE" method="post">
+        <button type="submit" name="button">Logout</button>
+      </form>
+      <%}else{%>
+    <li><a href="http://localhost:3000/Users/Login">Login</a>
+      <%}%>
+     </li>
+   </ul>
   <h1>The Flower Stop, Raynham Massachusetts</h1>
   <h2>Come Visit!</h2>
   <p>We are located at 255 Cape Hwy, East Taunton, MA 02718</p>

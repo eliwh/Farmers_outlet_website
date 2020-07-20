@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
+  access:{
+    type: String
+  },
   username:{
     type: String,
     required: true

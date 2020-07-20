@@ -15,10 +15,17 @@ module.exports ={
   },
 
   checkAdminAuthenticated: function(req,res,next){
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated() && req.user.access == 'Admin'){
       return next()
     }
     // req.flash('error_msg', 'please login to view this resource')
     res.redirect('http://localhost:3000/Admin/SignIn')
+  },
+  checkAdminNotAuthenticated: function(req,res,next){
+    if(req.isAuthenticated() && req.user.access == 'Admin'){
+      res.redirect('http://localhost:3000/AdminPage')
+    }
+    // req.flash('error_msg', 'please login to view this resource')
+    return next()
   }
 }

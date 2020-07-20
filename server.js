@@ -21,7 +21,7 @@ const authUser = new passport.Passport();
 require('./config/passport.js')(authUser)
 const adminPassport = new passport.Passport();
 require('./config/passport.js')(adminPassport)
-const {checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
+const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
 
 // Body parser needs to be added before crud handlers
 // C = Create | POST
@@ -109,7 +109,7 @@ app.get('/Produce', (req, res) => {
 
 //Admin page view
 // NOTE: Cannot protect this page yet, thinking that there will need to be two sessions
-app.get('/AdminPage', (req, res) => {
+app.get('/AdminPage', checkAdminAuthenticated,(req, res) => {
   inventory.collection('Plants').find().toArray()
       .then(results => {
       res.render('inventory.ejs', {plants: results})

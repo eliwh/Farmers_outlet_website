@@ -5,8 +5,8 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const session = require('express-session');
 const flash = require('express-flash')
-const adminPassport = require('passport')
-require('../config/adminPassport.js')(adminPassport)
+const authUser = require('passport')
+require('../config/passport.js')(authUser)
 const {checkAdminAuthenticated, checkAuthenticated, checkNotAuthenticated} = require('../config/auth')
 
 
@@ -29,7 +29,7 @@ app.get("/Orders", checkAdminAuthenticated,  (req,res) =>{
 })
 // Login Handle
 app.post('/SignIn', checkNotAuthenticated, (req,res, next)=>{
-  adminPassport.authenticate('local',{
+  authUser.authenticate('local',{
     successRedirect: '/AdminPage', //On success redirect to home
     failureRedirect: '/Admin/SignIn', //On failure redirect back to login page
     failureFlash: true
