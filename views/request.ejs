@@ -60,28 +60,28 @@
   				<img src="/images/shoppingBag.png" alt="Shopiing bag image">
   			</div>
 
-  			<form class="contact1-form validate-form">
+  			<form class="contact1-form validate-form" action="Orders" method="post">
   				<span class="contact1-form-title">
   					Make A Request
   				</span>
 
   				<div class="wrap-input1 validate-input" data-validate = "Name is required">
-  					<input class="input1" type="text" name="name" placeholder="Name">
+  					<input class="input1" type="text" name="name" placeholder="Name" required>
   					<span class="shadow-input1"></span>
   				</div>
 
   				<div class="wrap-input1 validate-input" data-validate = "Valid email is required: john@doe.com">
-  					<input class="input1" type="text" name="email" placeholder="Email">
+  					<input class="input1" type="text" name="email" placeholder="Email" required>
   					<span class="shadow-input1"></span>
   				</div>
 
   				<div class="wrap-input1 validate-input" data-validate = "Item Is Required">
-  					<input class="input1" type="text" name="item" placeholder="Item">
+  					<input class="input1" type="text" name="item" placeholder="Item" required>
   					<span class="shadow-input1"></span>
   				</div>
 
           <div class="wrap-input1 validate-input" data-validate = "Request Date Is Required">
-            <input class="input1" type="date" name="date" placeholder="Date Request">
+            <input class="input1" type="date" name="ready_by_date" placeholder="Date Request" required>
             <span class="shadow-input1"></span>
           </div>
 

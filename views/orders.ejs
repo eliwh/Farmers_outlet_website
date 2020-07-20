@@ -7,8 +7,33 @@
   <title>Order Central</title>
 </head>
 <body>
-  <h1>Welcome To Order Central</h1>
-  <p>This page is dedicated for <strong>administrative</strong> use only.</p>
-  <h2>Orders</h2>
+  <div action="Orders" method="post">
+    <h1>Welcome To Order Central</h1>
+    <p>This page is dedicated for <strong>administrative</strong> use only.</p>
+    <h2>Orders</h2>
+    <h2> Inventory Items </h2>
+    <table style="width:50%;" class="Orders">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Item</th>
+        <th>Ready By</th>
+        <th>Message</th>
+      </tr>
+
+      <!-- Loop through plants -->
+      <% for(var i = 0; i < Orders.length; i++) {%>
+      <tr>
+        <!-- Output name from the iterated plant object -->
+        <td><%= Orders[i].name %></td>:
+        <!-- Output plant from the iterated plant object -->
+        <td><%= Orders[i].email %></td>
+        <td><%= Orders[i].item %></td>
+        <td><%= Orders[i].ready_by_date %></td>
+        <td><%= Orders[i].message %></td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
 </body>
 </html>

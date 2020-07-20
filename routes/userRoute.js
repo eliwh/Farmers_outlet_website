@@ -14,8 +14,6 @@ const flash = require('express-flash')
 const passport = require('passport')
 const authUser = new passport.Passport();
 require('../config/passport.js')(authUser)
-// const {checkAuthenticated} = require('../config/auth')
-// const {checkNotAuthenticated} = require('../config/auth')
 
 const session = require('express-session');
 const {checkAuthenticated, checkNotAuthenticated} = require('../config/auth')

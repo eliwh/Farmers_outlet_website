@@ -19,8 +19,6 @@ const db = require('./config/keys').MongoURI
 const passport = require('passport')
 const authUser = new passport.Passport();
 require('./config/passport.js')(authUser)
-const adminPassport = new passport.Passport();
-require('./config/passport.js')(adminPassport)
 const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
 
 // Body parser needs to be added before crud handlers
@@ -54,6 +52,7 @@ const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, ch
     app.use(methodOverride('_method'))
     app.use('/Users', require('./routes/userRoute'))
     app.use('/Admin', require('./routes/adminRoute'))
+    app.use('/Request', require('./routes/requestRoute'))
     app.use(flash())
     app.use(function(req, res, next) {
       res.locals.success_msg = req.flash('success_msg');
@@ -91,9 +90,6 @@ app.get('/Blog', (req, res) => {res.render('blog.ejs')})
 
 // TODO: Implement contact
 app.get('/Contact', (req, res) => {  res.render('contact.ejs')})
-
-// TODO:  Implement request
-app.get('/Request', (req, res) => {res.render('request.ejs')})
 
 app.get('/Produce', (req, res) => {
   inventory.collection('Plants').find().toArray()
