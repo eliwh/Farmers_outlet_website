@@ -95,9 +95,9 @@ app.get('/Produce', (req, res) => {
   inventory.collection('Plants').find().toArray()
     .then(results => {
       if(req.user !== undefined){
-        res.render('produce.ejs',{plants: results},{name: req.user.username })
+        res.render('product',{plants: results},{name: req.user.username })
       }
-      res.render('produce.ejs',{plants: results})
+      res.render('product',{plants: results})
       // ,{name: req.user !== undefined ? req.user.username : ""}
     })
     .catch(error => console.error(error))
