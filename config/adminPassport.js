@@ -1,46 +1,42 @@
 const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 
 // Loads in user model
-const Admin = require('../models/adminModel');
+const Admin = require('../models/adminModel')
+
 
 module.exports = function (adminPassport){
   adminPassport.use(
-    new LocalStrategy({usernameField: 'username'}, (username, password, done)=>{
+    'admin',new LocalStrategy({usernameField: 'username'}, (username, password, done)=>{
       //Match user
-      Admin.findOne({username: username})
-      .then(user=>{
-        if(!user){
-          return done(null, false, {message: 'That username is not register'});
+      const admin = Admin.findOne({username: username})
+      .then(admin=>{
+        if(!admin){
+          return done(null, false, {message: 'Incorrect Username'})
         }
         //Match password
-        bcrypt.compare(password, user.password, (err, isMatch)=>{
+        bcrypt.compare(password, admin.password, (err, isMatch)=>{
           if(err) throw err;
           if (isMatch) {
-            return done(null, user);
+            return done(null, admin)
           }else {
-            return done(null, false, {message: 'Incorrect password'});
+            return done(null, false, {message: 'Incorrect password'})
           }
-        });
+        })
       })
       .catch(err=>console.log(err));
     })
-  );
+  )
 
-  adminPassport.serializeUser((user, done) =>{
-    done(null, user.id);
+  adminPassport.serializeUser((admin, done) =>{
+    done(null, admin.id);
   });
 
   adminPassport.deserializeUser((id, done) =>{
-    Admin.findById(id, (err, user) => {
-      done(err, user);
+    Admin.findById(id, (err, admin) => {
+      done(err, admin);
     });
   });
-
 }
-
-
-
-// NOTE: There is an issue in passport that needs to be found. The issue is not allowing me to access the admin login

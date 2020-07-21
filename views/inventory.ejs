@@ -26,10 +26,26 @@
       color: white;
     }
   </style>
+  <link href="/CSS/nav.css" rel="stylesheet">
 </head>
 
 <body>
-  <a href="http://localhost:3000/Admin/Orders">Order Central</a>
+  <ul>
+    <div action"home" method"post" class="navi">
+      <li><a href="http://localhost:3000/">Home</a>
+      <li><a href="http://localhost:3000/Admin/Orders">Orders</a>
+      <li><a href="http://localhost:3000/Admin/Make_A_Post">Blog</a>
+      <li>
+        <%if(locals.name){%>
+        welcome <%=name %>
+        <form class="" action="/Users/logout?_method=DELETE" method="post">
+          <button type="submit" name="button">Logout</button>
+        </form>
+        <%}else{%>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+        <%}%>
+       </li>
+     </ul>
   <h1>The Flower Stop Inventory</h1>
   <h2>Insert Plant Inventory</h2>
   <form action="/plants" method="POST">

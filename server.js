@@ -18,6 +18,7 @@ const db = require('./config/keys').MongoURI
 //passport and authentication config
 const passport = require('passport')
 const authUser = new passport.Passport();
+// const adminPassport = new passport.Passport();
 require('./config/passport.js')(authUser)
 const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, checkNotAuthenticated} = require('./config/auth')
 
@@ -33,7 +34,7 @@ const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, ch
     // Middlewares
     // ========================
     app.set('view engine', 'ejs')
-    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
     app.use(express.static('public'))
     app.use(session({
@@ -45,8 +46,6 @@ const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, ch
         expires: false
       }
     }))
-    // app.use(adminPassport.initialize())
-    // app.use(adminPassport.session())
     app.use(authUser.initialize())
     app.use(authUser.session())
     app.use(methodOverride('_method'))
@@ -64,7 +63,7 @@ const {checkAdminNotAuthenticated,checkAdminAuthenticated,checkAuthenticated, ch
 
 // Here we are connectng to MongoDB. All of our CRUD operations
 // are going to be done within the mongodb function
-MongoClient.connect(db, {useUnifiedTopology: true},(err, client) => {
+MongoClient.connect(db, {useUnifiedTopology: true},{poolSize: 10},(err, client) => {
   if(err) return console.error(err);
   console.log("Connected to MongoDB...");
   var inventory = client.db("tfsInventory");
@@ -105,10 +104,14 @@ app.get('/Produce', (req, res) => {
 
 //Admin page view
 // NOTE: Cannot protect this page yet, thinking that there will need to be two sessions
-app.get('/AdminPage', checkAdminAuthenticated,(req, res) => {
+app.get('/AdminPage',checkAdminAuthenticated,(req, res) => {
   inventory.collection('Plants').find().toArray()
-      .then(results => {
-      res.render('inventory.ejs', {plants: results})
+    .then(results => {
+      if(req.user !== undefined){
+        res.render('inventory',{plants: results},{name: req.user.username })
+      }
+      res.render('inventory',{plants: results})
+      // ,{name: req.user !== undefined ? req.user.username : ""}
     })
     .catch(error => console.error(error))
 })

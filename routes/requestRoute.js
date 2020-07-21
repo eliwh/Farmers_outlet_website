@@ -8,7 +8,7 @@ const session = require('express-session');
 
 
 // DB config
-const db = require('../config/keys').requestURI
+const db = require('../config/keys').MongoURI
 const Request = require('../models/requestModel')
 
 app.set('view-engine', 'ejs')
@@ -19,9 +19,8 @@ app.use(flash())
 
 //connect to mongodb
 mongoose.set('useUnifiedTopology', true)
-mongoose.connect(db, {
-  useNewUrlParser: true
-})
+mongoose.set('useNewUrlParser', true)
+mongoose.connect(db)
 // Route works but for some reason is looking in the userAccounts database for information
 // instead of the Request databse
 // app.get('/Orders', checkNotAuthenticated, (req, res) => {

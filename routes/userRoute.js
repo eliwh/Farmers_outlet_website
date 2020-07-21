@@ -20,16 +20,17 @@ const {checkAuthenticated, checkNotAuthenticated} = require('../config/auth')
 
 
 // DB config
-const db = require('../config/keys').userURI
+const userDB = require('../config/keys').MongoURI
 const User = require('../models/userModel')
 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 
 //connect to mongodb
 mongoose.set('useUnifiedTopology', true)
-mongoose.connect(db, {useNewUrlParser: true})
+mongoose.set('useNewUrlParser', true)
+mongoose.connect(userDB)
 
 app.get("/Login", checkNotAuthenticated,(req,res) =>{
   res.render("login.ejs")
@@ -46,7 +47,7 @@ app.get('/Register', checkNotAuthenticated,  (req,res)=>{
 
 // Login Handle
 app.post('/Login', checkNotAuthenticated,(req,res, next)=>{
-  authUser.authenticate('local',{
+  authUser.authenticate('authUser',{
     successRedirect: '/', //On success redirect to home
     failureRedirect: '/Users/Login', //On failure redirect back to login page
     session: true,
