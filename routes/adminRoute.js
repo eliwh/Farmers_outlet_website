@@ -73,7 +73,7 @@ mongoose.set('useUnifiedTopology', true)
 app.get("/SignIn", checkNotAuthenticated,(req,res) =>{
   res.render("adminLogin.ejs")
 })
-app.get('/Orders', checkNotAuthenticated, (req, res) => {
+app.get('/Orders', (req, res) => {
   Request.find({}).then(results => {
     res.render('orders.ejs', {
       Orders: results
