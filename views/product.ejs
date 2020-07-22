@@ -15,12 +15,12 @@
   <div action"home" method"post" class="navi">
     <li><a href="http://localhost:3000/">Home</a>
     <li><a href="http://localhost:3000/Contact">Contact Us</a>
-    <li><a href="http://localhost:3000/Produce">Produce</a>
+    <li><a href="http://localhost:3000/Produce">Products</a>
     <li><a href="http://localhost:3000/Blog">Blog</a>
     <li><a href="http://localhost:3000/Request">Request</a>
     <li><a href="http://localhost:3000/test">test</a>
     <li>
-      <h1> Products</h1>
+
       <%if(locals.name){%>
       welcome <%=name %>
       <form class="" action="/Users/logout?_method=DELETE" method="post">
@@ -31,10 +31,11 @@
       <%}%>
      </li>
    </ul>
-
+<!--End of Nav Bar -->
+<h1><center> Products</center></h1>
 <style>
 body{
-  background-image: url("/images/productbkg.jpg");}
+  background-image: url("/images/wood-roses.jpg");}
   </style>
 
   <table>
@@ -136,7 +137,7 @@ body{
         <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <p>Example</p>
         <%}%>
           <%}%>
       </div>
@@ -156,7 +157,7 @@ body{
         <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <p>Example</p>
         <%}%>
           <%}%>
       </div>
