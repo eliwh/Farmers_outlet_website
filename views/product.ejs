@@ -17,7 +17,7 @@
     <li><a href="http://localhost:3000/Contact">Contact Us</a>
     <li><a href="http://localhost:3000/Produce">Products</a>
     <li><a href="http://localhost:3000/Blog">Blog</a>
-    <li><a href="http://localhost:3000/Request">Request</a>
+    <li><a href="http://localhost:3000/Request/Place_An_Order">Request</a>
     <li><a href="http://localhost:3000/test">test</a>
     <li>
 
@@ -55,7 +55,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Pink Rose</p>
+      <p><%=plants[i].Description%></p>
       <%}%>
           <%}%>
   </div>
@@ -64,7 +64,7 @@ body{
     <div class="card">
 
       <% for(var i = 0; i < plants.length; i++) {%>
-      <% if(plants[i].Name == 'Roses') {%>
+      <% if(plants[i].Name == 'Purple Flower') {%>
       <h1><%=plants[i].Name%></h1>
       <img src="/images/purple.jpeg" alt="Purple Flower"  class="image">
       <p>
@@ -75,7 +75,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Purple Flower</p>
+      <p><%=plants[i].Description%></p>
       <%}%>
           <%}%>
     </div>
@@ -84,9 +84,9 @@ body{
     <div class="card">
 
       <% for(var i = 0; i < plants.length; i++) {%>
-      <% if(plants[i].Name == 'Roses') {%>
+      <% if(plants[i].Name == 'Purple Sunflower') {%>
       <h1><%=plants[i].Name%></h1>
-      <img src="/images/psunf.jpeg" alt="SunFlower" >
+      <img src="/images/psunf.jpeg" alt="SunFlower" class="image">
       <p>
         In Stock:
         <%=plants[i].Quantity%>
@@ -95,7 +95,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Purple Sunflower</p>
+      <p><%=plants[i].Description%></p>
       <%}%>
           <%}%>
     </div>
@@ -104,9 +104,9 @@ body{
     <div class="card">
 
       <% for(var i = 0; i < plants.length; i++) {%>
-      <% if(plants[i].Name == 'Roses') {%>
+      <% if(plants[i].Name == 'Red Flower') {%>
       <h1><%=plants[i].Name%></h1>
-      <img src="/images/red.jpeg" alt="Red Flower">
+      <img src="/images/red.jpeg" alt="Red Flower" class="image">
       <p>
         In Stock:
         <%=plants[i].Quantity%>
@@ -115,53 +115,31 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Red Flower</p>
+      <p><%=plants[i].Description%></p>
       <%}%>
           <%}%>
     </div>
   </td>
-  </tr>
-  <tr>
-    <td>
-      <div class="card">
+  <td>
+    <div class="card">
 
-        <% for(var i = 0; i < plants.length; i++) {%>
-        <% if(plants[i].Name == 'Roses') {%>
-        <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower">
-        <p>
-          In Stock:
-          <%=plants[i].Quantity%>
-          <%if(plants[i].Quantity < 5){%>
-        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
-        <%}%>
+      <% for(var i = 0; i < plants.length; i++) {%>
+      <% if(plants[i].Name == 'Mint') {%>
+      <h1><%=plants[i].Name%></h1>
+      <img src="/images/mintProduct.jpg" alt="Mint" class="image">
+      <p>
+        In Stock:
+        <%=plants[i].Quantity%>
+        <%if(plants[i].Quantity < 5){%>
+      <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
+      <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Example</p>
-        <%}%>
+      <p><%=plants[i].Description%></p>
+      <%}%>
           <%}%>
-      </div>
-    </td>
-    <td>
-      <div class="card">
-
-        <% for(var i = 0; i < plants.length; i++) {%>
-        <% if(plants[i].Name == 'Roses') {%>
-        <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower">
-        <p>
-          In Stock:
-          <%=plants[i].Quantity%>
-          <%if(plants[i].Quantity < 5){%>
-        <p style="color:red">Only <%=plants[i].Quantity%> Left!!</p>
-        <%}%>
-        </p>
-        <p class="price" >$<%=plants[i].Price%></p>
-        <p>Example</p>
-        <%}%>
-          <%}%>
-      </div>
-    </td>
+    </div>
+  </td>
   </tr>
   </table>
 

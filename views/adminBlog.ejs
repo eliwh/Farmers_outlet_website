@@ -13,7 +13,26 @@
         background: #f1f1f1;
       }
     </style>
+    <link href="/CSS/nav.css" rel="stylesheet">
+
   </head>
+  <ul>
+    <div action"home" method"post" class="navi">
+      <li><a href="http://localhost:3000/">Home</a>
+      <li><a href="http://localhost:3000/Admin/Orders">Orders</a>
+      <li><a href="http://localhost:3000/Admin/Make_A_Post">Blog</a>
+        <li><a href="http://localhost:3000/AdminPage">Inventory Mgmt</a>
+      <li>
+        <%if(locals.name){%>
+        welcome <%=name %>
+        <form class="" action="/Users/logout?_method=DELETE" method="post">
+          <button type="submit" name="button">Logout</button>
+        </form>
+        <%}else{%>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+        <%}%>
+           </li>
+         </ul>
   <body>
     <div class="bloginput">
       <form>

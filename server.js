@@ -108,7 +108,8 @@ app.get('/AdminPage',checkAdminAuthenticated,(req, res) => {
   inventory.collection('Plants').find().toArray()
     .then(results => {
       if(req.user !== undefined){
-        res.render('inventory',{plants: results},{name: req.user.username })
+        const name = {name: req.user.username }
+        res.render('inventory',{plants: results},name)
       }
       res.render('inventory',{plants: results})
       // ,{name: req.user !== undefined ? req.user.username : ""}

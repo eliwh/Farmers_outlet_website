@@ -57,7 +57,7 @@ app.post('/Login', checkNotAuthenticated,(req,res, next)=>{
 module.exports = app
 
 app.post('/register', checkNotAuthenticated, (req,res)=>{
-  const { access, first_name, last_name, username, email, password, password2 } = req.body;
+  const { admin, first_name, last_name, username, email, password, password2 } = req.body;
   let errors = []
   if(password != password2){
     errors.push()
@@ -65,7 +65,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
   }
   if(errors.length > 0){
     res.render('Register',{
-      access,
+      admin,
       first_name,
       last_name,
       username,
@@ -90,7 +90,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
 else{
   const newUser = new User({
     // name,
-    access: 'User',
+    admin: 'False',
     first_name,
     last_name,
     username,

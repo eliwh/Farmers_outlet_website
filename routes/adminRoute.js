@@ -62,6 +62,8 @@ const {checkAdminAuthenticated, checkAuthenticated, checkNotAuthenticated} = req
 const db = require('../config/keys').MongoURI
 const Request = require('../models/requestModel')
 const Admin = require('../models/adminModel')
+const User = require('../models/userModel')
+
 
 
 app.set('view-engine', 'ejs')
@@ -70,20 +72,19 @@ app.use(flash())
 
 function requireAdmin() {
   return function(req, res, next) {
-    const {username} = req.body;
-
-    Admin.findOne({ username:username }, function(err, admin) {
+    const {username} =  req.body
+    User.findOne({ username:username }, function(err, user) {
       if (err) { return next(err); }
-
-      if(admin.admin == true){
-        console.log(admin);
+      if(user.admin == 'true'){
+        console.log("User authenticated. Admin",user.admin);
       }
-
-      if (!admin) {
+      if (!user) {
         // Do something - the user does not exist
+        res.redirect('/Users/Register')
       }
 
-      if (!admin.admin) {
+      if (user.admin == 'false') {
+        // Do something - the user exists but is no admin user
         res.redirect('/Users/Login')
       }
 
