@@ -20,6 +20,7 @@
     <li><a href="http://localhost:3000/Request">Request</a>
     <li><a href="http://localhost:3000/test">test</a>
     <li>
+      <h1> Products</h1>
       <%if(locals.name){%>
       welcome <%=name %>
       <form class="" action="/Users/logout?_method=DELETE" method="post">
@@ -146,7 +147,7 @@ body{
         <% for(var i = 0; i < plants.length; i++) {%>
         <% if(plants[i].Name == 'Roses') {%>
         <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+        <img src="/images/pink.jpeg" alt="Pink Flower">
         <p>
           In Stock:
           <%=plants[i].Quantity%>
