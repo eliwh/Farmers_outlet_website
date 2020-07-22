@@ -15,11 +15,12 @@
   <div action"home" method"post" class="navi">
     <li><a href="http://localhost:3000/">Home</a>
     <li><a href="http://localhost:3000/Contact">Contact Us</a>
-    <li><a href="http://localhost:3000/Produce">Produce</a>
+    <li><a href="http://localhost:3000/Produce">Products</a>
     <li><a href="http://localhost:3000/Blog">Blog</a>
     <li><a href="http://localhost:3000/Request">Request</a>
     <li><a href="http://localhost:3000/test">test</a>
     <li>
+
       <%if(locals.name){%>
       welcome <%=name %>
       <form class="" action="/Users/logout?_method=DELETE" method="post">
@@ -30,10 +31,11 @@
       <%}%>
      </li>
    </ul>
-
+<!--End of Nav Bar -->
+<h1><center> Products</center></h1>
 <style>
 body{
-  background-image: url("/images/productbkg.jpg");}
+  background-image: url("/images/wood-roses.jpg");}
   </style>
 
   <table>
@@ -53,7 +55,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <p>Pink Rose</p>
       <%}%>
           <%}%>
   </div>
@@ -64,7 +66,7 @@ body{
       <% for(var i = 0; i < plants.length; i++) {%>
       <% if(plants[i].Name == 'Roses') {%>
       <h1><%=plants[i].Name%></h1>
-      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <img src="/images/purple.jpeg" alt="Purple Flower"  class="image">
       <p>
         In Stock:
         <%=plants[i].Quantity%>
@@ -73,7 +75,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <p>Purple Flower</p>
       <%}%>
           <%}%>
     </div>
@@ -84,7 +86,7 @@ body{
       <% for(var i = 0; i < plants.length; i++) {%>
       <% if(plants[i].Name == 'Roses') {%>
       <h1><%=plants[i].Name%></h1>
-      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <img src="/images/psunf.jpeg" alt="SunFlower" >
       <p>
         In Stock:
         <%=plants[i].Quantity%>
@@ -93,7 +95,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <p>Purple Sunflower</p>
       <%}%>
           <%}%>
     </div>
@@ -104,7 +106,7 @@ body{
       <% for(var i = 0; i < plants.length; i++) {%>
       <% if(plants[i].Name == 'Roses') {%>
       <h1><%=plants[i].Name%></h1>
-      <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+      <img src="/images/red.jpeg" alt="Red Flower">
       <p>
         In Stock:
         <%=plants[i].Quantity%>
@@ -113,7 +115,7 @@ body{
       <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-      <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+      <p>Red Flower</p>
       <%}%>
           <%}%>
     </div>
@@ -126,7 +128,7 @@ body{
         <% for(var i = 0; i < plants.length; i++) {%>
         <% if(plants[i].Name == 'Roses') {%>
         <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+        <img src="/images/pink.jpeg" alt="Pink Flower">
         <p>
           In Stock:
           <%=plants[i].Quantity%>
@@ -135,7 +137,7 @@ body{
         <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <p>Example</p>
         <%}%>
           <%}%>
       </div>
@@ -146,7 +148,7 @@ body{
         <% for(var i = 0; i < plants.length; i++) {%>
         <% if(plants[i].Name == 'Roses') {%>
         <h1><%=plants[i].Name%></h1>
-        <img src="/images/pink.jpeg" alt="Pink Flower" style="width:100%">
+        <img src="/images/pink.jpeg" alt="Pink Flower">
         <p>
           In Stock:
           <%=plants[i].Quantity%>
@@ -155,7 +157,7 @@ body{
         <%}%>
         </p>
         <p class="price" >$<%=plants[i].Price%></p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <p>Example</p>
         <%}%>
           <%}%>
       </div>
