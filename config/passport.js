@@ -50,11 +50,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-
 // Loads in user model
 const User = require('../models/userModel')
 const Admin = require('../models/adminModel')
-
 
 module.exports = function (authUser){
   authUser.use(
@@ -88,7 +86,6 @@ module.exports = function (authUser){
       done(err, user);
     });
   });
-
 
   authUser.use(
     'admin',new LocalStrategy({usernameField: 'username'}, (username, password, done)=>{

@@ -70,9 +70,9 @@ app.use(flash())
 
 function requireAdmin() {
   return function(req, res, next) {
-    const { first_name, last_name, username, email, password, password2 } = req.body;
+    const {username} = req.body;
 
-    Admin.findOne({ username }, function(err, admin) {
+    Admin.findOne({ username:username }, function(err, admin) {
       if (err) { return next(err); }
 
       if(admin.admin == true){
