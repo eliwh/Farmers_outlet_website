@@ -78,7 +78,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
       if (user) {
         req.flash('error_msg','Username Taken');
         res.render('Register', {
-          access,
+          admin,
           first_name,
           last_name,
           username,
