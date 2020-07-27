@@ -5,19 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Order Central</title>
+  <title>Admin-Orders</title>
   <link href="/CSS/nav.css" rel="stylesheet">
+  <link href="/CSS/admin.css" rel="stylesheet">
+
 
 </head>
 
-<body>
+<body class="center">
   <ul>
     <div action"home" method"post" class="navi">
       <li><a href="http://localhost:3000/">Home</a>
       <li><a href="http://localhost:3000/Admin/Orders">Orders</a>
       <li><a href="http://localhost:3000/Admin/Make_A_Post">Blog</a>
       <li><a href="http://localhost:3000/AdminPage">Inventory Mgmt</a>
-
       <li>
         <%if(locals.name){%>
         welcome <%=name %>
@@ -30,17 +31,15 @@
            </li>
          </ul>
   <div action="Orders" method="post">
-    <h1>Welcome To Order Central</h1>
-    <p>This page is dedicated for <strong>administrative</strong> use only.</p>
-    <h2>Orders</h2>
-    <h2> Inventory Items </h2>
-    <table style="width:50%;" class="Orders">
+    <h1>orders</h1>
+    <table class="center">
       <tr>
         <th>Name</th>
         <th>Email</th>
         <th>Item</th>
         <th>Ready By</th>
         <th>Message</th>
+        <th>Status:</th>
       </tr>
 
       <!-- Loop through plants -->
@@ -49,10 +48,18 @@
           <!-- Output name from the iterated plant object -->
           <td><%= Orders[i].name %></td>:
           <!-- Output plant from the iterated plant object -->
-          <td><%= Orders[i].email %></td>
+          <td><a href="mailto: <%= Orders[i].email %>"><%= Orders[i].email %></a></td>
           <td><%= Orders[i].item %></td>
           <td><%= Orders[i].ready_by_date %></td>
           <td><%= Orders[i].message %></td>
+          <td>
+            <select name="status">
+              <option value="New Order">New Order</option>
+              <option value="Made Contact">Made Contact</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Order Complete">Order Complete</option>
+            </select>
+          </td>
         </tr>
         <% } %>
         </table>

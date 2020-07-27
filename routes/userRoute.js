@@ -90,7 +90,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
 else{
   const newUser = new User({
     // name,
-    admin: 'False',
+    admin: 'false',
     first_name,
     last_name,
     username,

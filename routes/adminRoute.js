@@ -55,7 +55,11 @@ const session = require('express-session');
 const flash = require('express-flash')
 const passport = require('passport')
 require('../config/passport.js')(passport)
-const {checkAdminAuthenticated, checkAuthenticated, checkNotAuthenticated} = require('../config/auth')
+const {
+  checkAdminAuthenticated,
+  checkAuthenticated,
+  checkNotAuthenticated
+} = require('../config/auth')
 
 
 // DB config
@@ -67,16 +71,24 @@ const User = require('../models/userModel')
 
 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({
+  extended: false
+}))
 app.use(flash())
 
 function requireAdmin() {
   return function(req, res, next) {
-    const {username} =  req.body
-    User.findOne({ username:username }, function(err, user) {
-      if (err) { return next(err); }
-      if(user.admin == 'true'){
-        console.log("User authenticated. Admin",user.admin);
+    const {
+      username
+    } = req.body
+    User.findOne({
+      username: username
+    }, function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      if (user.admin == 'true') {
+        console.log("User authenticated. Admin", user.admin);
       }
       if (!user) {
         // Do something - the user does not exist
@@ -85,6 +97,7 @@ function requireAdmin() {
 
       if (user.admin == 'false') {
         // Do something - the user exists but is no admin user
+        console.log("Account is unauthorized:", user.admin);
         res.redirect('/Users/Login')
       }
 
@@ -101,12 +114,12 @@ function requireAdmin() {
 //connect to mongodb
 mongoose.set('useUnifiedTopology', true)
 mongoose.set('useNewUrlParser', true)
-mongoose.connect(db )
+mongoose.connect(db)
 
-app.get('/Make_A_Post',checkAdminAuthenticated, (req,res)=>{
+app.get('/Make_A_Post', checkAdminAuthenticated, (req, res) => {
   res.render('adminBlog')
 })
-app.get("/SignIn", checkNotAuthenticated,(req,res) =>{
+app.get("/SignIn", checkNotAuthenticated, (req, res) => {
   res.render("adminLogin.ejs")
 })
 app.get('/Orders', checkAdminAuthenticated, (req, res) => {
@@ -117,12 +130,12 @@ app.get('/Orders', checkAdminAuthenticated, (req, res) => {
   })
 })
 // Login Handle
-app.post('/SignIn',requireAdmin(), (req,res, next)=>{
-  passport.authenticate('authUser',{
+app.post('/SignIn', requireAdmin(), (req, res, next) => {
+  passport.authenticate('authUser', {
     successRedirect: '/AdminPage', //On success redirect to home
     failureRedirect: '/Admin/SignIn', //On failure redirect back to login page
     session: true,
     failureFlash: true
-  })(req,res,next);
+  })(req, res, next);
 })
 module.exports = app
