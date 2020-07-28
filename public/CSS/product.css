@@ -1,19 +1,20 @@
 .card {
   /* Border radius gives us those rounded corners  */
-  border-radius: 25px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
   margin: auto;
   text-align: center;
-  font-family: arial;
+  word-wrap: break-word;
+  font-family: Optima;
   background-color: #f1f1f1;
+
 }
 .price {
   color: grey;
   font-size: 22px;
 }
 .image{
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 25px;
-}
