@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -7,50 +8,52 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title> The Flower Stop</title>
   <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+  <link rel="icon" type="image/png" href="/images/icons/flower.ico" />
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/CSS/contactUtil.css">
-    <link rel="stylesheet" type="text/css" href="/CSS/contact.css">
+  <link rel="stylesheet" type="text/css" href="/CSS/contactUtil.css">
+  <link rel="stylesheet" type="text/css" href="/CSS/contact.css">
   <!--===============================================================================================-->
   <link href="/CSS/nav.css" rel="stylesheet">
 </head>
 
-   <body>
+<body>
 
-   <ul>
-   <div action"home" method"post" class="navi">
-     <li><a href="http://localhost:3000/">Home</a>
-     <li><a href="http://localhost:3000/Contact">Contact Us</a>
-     <li><a href="http://localhost:3000/Produce">Products</a>
-     <li><a href="http://localhost:3000/Blog">Blog</a>
-     <li><a href="http://localhost:3000/test">test</a>
-       <li>
-         <%if(locals.name){%>
-         welcome <%=name %>
-         <form class="" action="/Users/logout?_method=DELETE" method="post">
-           <button type="submit" name="button">Logout</button>
-         </form>
-         <%}else{%>
-           <li><a href="http://localhost:3000/Users/Login">Login</a>
-         <%}%>
-       </li>
-     </ul>
+  <ul>
+    <div action"request" method"post" class="navi">
+      <li><a href="http://localhost:3000/">Home</a>
+      <li><a href="http://localhost:3000/Contact">Contact Us</a>
+      <li><a href="http://localhost:3000/Request/Place_An_Order">Make A Request</a>
+      <li><a href="http://localhost:3000/Produce">Flowers and Plants</a>
+      <li><a href="http://localhost:3000/Blog">Flower Stop Blog</a>
+      <li>
+        <%if(locals.name){%>
+        welcome <%=name %>
+        <form action="/Users/logout?_method=DELETE" method="post">
+          <button type="submit" name="button">Logout</button>
+        </form>
+        <%}else{%>
+      <li><a href="http://localhost:3000/Users/Login">Login</a>
+        <%}%>
+          </li>
+
+            <!-- <li><a href="http://localhost:3000/test">test</a> -->
+        </ul>
 
 
 

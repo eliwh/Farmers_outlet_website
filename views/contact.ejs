@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title> The Flower Stop</title>
   <!--===============================================================================================-->
-  <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
+  <link rel="icon" type="image/png" href="/images/icons/flower.ico"/>
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
@@ -34,24 +34,25 @@
 
 <body>
   <ul>
-    <div action"home" method"post" class="navi">
+    <div action"contact" method"post" class="navi">
       <li><a href="http://localhost:3000/">Home</a>
       <li><a href="http://localhost:3000/Contact">Contact Us</a>
-      <li><a href="http://localhost:3000/Produce">Products</a>
-      <li><a href="http://localhost:3000/Blog">Blog</a>
-      <li><a href="http://localhost:3000/Request/Place_An_Order">Request</a>
-      <li><a href="http://localhost:3000/test">test</a>
+      <li><a href="http://localhost:3000/Request/Place_An_Order">Make A Request</a>
+      <li><a href="http://localhost:3000/Produce">Flowers and Plants</a>
+      <li><a href="http://localhost:3000/Blog">Flower Stop Blog</a>
       <li>
         <%if(locals.name){%>
         welcome <%=name %>
-        <form class="" action="/Users/logout?_method=DELETE" method="post">
+        <form action="/Users/logout?_method=DELETE" method="post">
           <button type="submit" name="button">Logout</button>
         </form>
         <%}else{%>
       <li><a href="http://localhost:3000/Users/Login">Login</a>
         <%}%>
-     </li>
-   </ul>
+       </li>
+
+         <!-- <li><a href="http://localhost:3000/test">test</a> -->
+     </ul>
 
   <div class="contact1" style="background-image: url('/images/mintBG.jpg');">
     <div style="background-image: url('/images/mintBG.jpg');">
